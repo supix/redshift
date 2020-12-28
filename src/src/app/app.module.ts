@@ -5,6 +5,8 @@ import { AppComponent } from './components/app/app.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ShiftsComponent } from './components/shifts/shifts.component';
+import { ShiftsService } from './services/shifts/shifts.service';
+import { ShiftsFakeService } from './services/shifts/shifts.fake.service';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,7 @@ import { ShiftsComponent } from './components/shifts/shifts.component';
     FontAwesomeModule,
     NgbModule
   ],
-  providers: [],
+  providers: [ { provide: ShiftsService, useClass: ShiftsFakeService }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

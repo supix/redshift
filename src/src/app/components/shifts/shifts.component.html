@@ -1,1 +1,14 @@
-<p>shifts works!</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col"></th>
+            <th *ngFor="let d of calendar()" scope="col">{{ dateToStr(d) }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let n of manNames()">
+            <th scope="row">{{ n }}</th>
+            <td *ngFor="let d of calendar()">{{ getShiftText(n, d) }}</td>
+        </tr>
+    </tbody>
+</table>
