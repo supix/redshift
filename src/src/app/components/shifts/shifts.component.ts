@@ -12,8 +12,8 @@ export class ShiftsComponent implements OnInit {
   private toDate: Date;
   private shiftsData: ManShift[];
 
-  public manNames(): string[] {
-    return this.shiftsData.map(s => s.turnista);
+  public manNames() {
+    return this.shiftsData.map(s => ({ name: s.turnista, group: s.tipo_turnista }));
   }
 
   public getShiftText(manName: string, date: Date): string {

@@ -2,3 +2,7 @@
     font-size: small;
     font-weight: normal;
 }
+
+.shifts-table th.man-name {
+    width: 25ex;
+}
