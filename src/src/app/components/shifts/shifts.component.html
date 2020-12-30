@@ -11,7 +11,7 @@
                 <span class="float-right badge badge-info">{{ info.group }}</span>
                 <div class="">{{ info.name }}</div>
             </th>
-            <td *ngFor="let d of calendar()" class="text-center">{{ getShiftText(info.name, d) }}</td>
+            <td *ngFor="let s of getShiftsInfo(info.name)" class="text-center" title="{{ s.tooltip }}">{{ s.text }}</td>
         </tr>
     </tbody>
 </table>

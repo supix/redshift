@@ -16,22 +16,31 @@ export class ShiftsComponent implements OnInit {
     return this.shiftsData.map(s => ({ name: s.turnista, group: s.tipo_turnista }));
   }
 
-  public getShiftText(manName: string, date: Date): string {
+  public getShiftsInfo(manName: string) {
+    const emptyResult = { text: '', tooltip: '' };
+    const result = [];
     const manShifts = this.shiftsData
       .find(s => s.turnista === manName);
 
     if (!manShifts) {
-      return '';
+      this.calendar().forEach(date => {
+        result.push(emptyResult);
+      });
+
+      return result;
     }
 
-    const dayShift = manShifts.presenze
-      .find(d => d.data.valueOf() === date.valueOf());
-
-    if (!dayShift) {
-      return '';
-    }
-
-    return dayShift.turno_abbr;
+    this.calendar().forEach(date => {
+      const dayShift = manShifts.presenze
+        .find(d => d.data.valueOf() === date.valueOf());
+      if (!dayShift) {
+        result.push(emptyResult);
+      } else {
+        result.push({ text: dayShift.turno_abbr, tooltip: dayShift.turno });
+      }
+    });
+    console.log(result);
+    return result;
   }
 
   constructor(public shiftsService: ShiftsService) {
