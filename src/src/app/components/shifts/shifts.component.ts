@@ -159,4 +159,16 @@ export class ShiftsComponent implements OnInit {
   public cancelChanges(): void {
     this.editingMan = null;
   }
+
+  /**
+   * Returns the CSS class related to the man group
+   * @param c The man class
+   */
+  public cssClassByGroup(c: string): string {
+    switch(c) {
+      case 'Interno': return 'badge-success';
+      case 'Esterno': return 'badge-warning';
+      default: return 'bg-secondary';
+    }
+  }
 }

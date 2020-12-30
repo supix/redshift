@@ -10,7 +10,7 @@
     <tbody>
         <tr *ngFor="let info of manInfo()">
             <th scope="row">
-                <span class="badge badge-info m-1">{{ info.group }}</span>
+                <span [ngClass]="cssClassByGroup(info.group)" class="badge m-1">{{ info.group }}</span>
             </th>
             <th scope="row" class="man-name">
                 <button *ngIf="!nowEditingMan" type="button" class="btn btn-link btn-sm float-right p-0"
