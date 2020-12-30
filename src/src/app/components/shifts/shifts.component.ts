@@ -12,7 +12,7 @@ export class ShiftsComponent implements OnInit {
   private toDate: Date;
   private shiftsData: ManShift[];
 
-  public manNames() {
+  public manInfo() {
     return this.shiftsData.map(s => ({ name: s.turnista, group: s.tipo_turnista }));
   }
 

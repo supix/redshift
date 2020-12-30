@@ -6,12 +6,12 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let n of manNames()">
+        <tr *ngFor="let info of manInfo()">
             <th scope="row" class="man-name">
-                <span class="float-right badge badge-info">{{ n.group }}</span>
-                <div class="">{{ n.name }}</div>
+                <span class="float-right badge badge-info">{{ info.group }}</span>
+                <div class="">{{ info.name }}</div>
             </th>
-            <td *ngFor="let d of calendar()" class="text-center">{{ getShiftText(n, d) }}</td>
+            <td *ngFor="let d of calendar()" class="text-center">{{ getShiftText(info.name, d) }}</td>
         </tr>
     </tbody>
 </table>
