@@ -11,6 +11,10 @@
     min-width: 30ex;
 }
 
-.holyday {
-    background: repeating-linear-gradient( 40deg, transparent, transparent 10px, #eee 10px, #ddd 20px)
+.shifts-table th.holyday {
+    background: #eee;
+}
+
+.shifts-table .holyday {
+    background: repeating-linear-gradient( 40deg, transparent, transparent 10px, #fff 10px, #eee 20px)
 }
