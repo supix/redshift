@@ -109,29 +109,6 @@ export class ShiftsComponent implements OnInit {
   }
 
   /**
-   * converts a date into a string to be shown. This method must be removed and converted to a pipe.
-   * @param d the date to be converted
-   */
-  public dateToStr(d: Date): string {
-    const dayNames = ['dom', 'lun', 'mar', 'mer', 'gio', 'ven', 'sab'];
-    let month = '' + (d.getMonth() + 1);
-    let day = '' + d.getDate();
-    const year = d.getFullYear();
-
-    if (month.length < 2) {
-      month = '0' + month;
-    }
-
-    if (day.length < 2) {
-      day = '0' + day;
-    }
-
-    const dayName = dayNames[d.getDay()];
-
-    return dayName + ' ' + [day, month].join('/');
-  }
-
-  /**
    * Returns the name of the man currently being edited
    */
   public get nowEditingMan(): string {

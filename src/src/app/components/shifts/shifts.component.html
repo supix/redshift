@@ -4,7 +4,7 @@
             <th scope="col"></th>
             <th scope="col"></th>
             <th *ngFor="let dayInfo of calendar()" scope="col" class="text-center"
-                [ngClass]="{holyday: dayInfo.holyday}">{{ dateToStr(dayInfo.day) }}</th>
+                [ngClass]="{holyday: dayInfo.holyday}">{{ dayInfo.day | dtos }}</th>
         </tr>
     </thead>
     <tbody>

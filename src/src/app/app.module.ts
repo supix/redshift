@@ -9,12 +9,14 @@ import { ShiftsService } from './services/shifts/shifts.service';
 import { ShiftsFakeService } from './services/shifts/shifts.fake.service';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { RouterModule } from '@angular/router';
+import { DtosPipe } from './pipes/dtos/dtos.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     ShiftsComponent,
-    NavbarComponent
+    NavbarComponent,
+    DtosPipe
   ],
   imports: [
     RouterModule.forRoot([]),
