@@ -32,10 +32,18 @@ export class ShiftsComponent implements OnInit {
     });
   }
 
+  /**
+   * Maps the shifts data to an array of objects read by the DOM
+   * @returns an array of objects with the man information, to be shown in the column headers
+   */
   public manInfo(): { name: string; group: string }[] {
     return this.shiftsData.map(s => ({ name: s.turnista, group: s.tipo_turnista }));
   }
 
+  /**
+   * Extracts shifts information from the shifts data
+   * @returns an array as long as the interval between fromDate and toDate
+   */
   public getShiftsInfo(manName: string): { text: string; tooltip: string; holyday: boolean }[] {
     const result: { text: string; tooltip: string; holyday: boolean }[] = [];
     const manShifts = this.shiftsData
@@ -61,16 +69,28 @@ export class ShiftsComponent implements OnInit {
     return result;
   }
 
+  /**
+   * computes the initial dates, as the first and the last day of the current month
+   */
   private initDates(): void {
     const curDate = new Date();
     this.fromDate = new Date(curDate.getFullYear(), curDate.getMonth(), 1);
     this.toDate = new Date(curDate.getFullYear(), curDate.getMonth() + 1, 0);
   }
 
+  /**
+   * converts a date in a dat object
+   * @returns an objects carrying the holiday information as well
+   */
   private dateToObj(day: Date): { day: Date; holyday: boolean } {
     const holyday = [0, 6].indexOf(day.getDay()) >= 0;
     return { day, holyday };
   }
+
+  /**
+   * Creates an array of days, as long as the interval between fromDate and toDate
+   * @returns the array
+   */
   public calendar(): { day: Date; holyday: boolean }[] {
     const year = this.fromDate.getFullYear();
     const month = this.fromDate.getMonth();
@@ -84,6 +104,10 @@ export class ShiftsComponent implements OnInit {
     return result.map(d => this.dateToObj(d));
   }
 
+  /**
+   * converts a date into a string to be shown. This method must be removed and converted to a pipe.
+   * @param d the date to be converted
+   */
   public dateToStr(d: Date): string {
     const dayNames = ['dom', 'lun', 'mar', 'mer', 'gio', 'ven', 'sab'];
     let month = '' + (d.getMonth() + 1);
