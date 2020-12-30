@@ -18,30 +18,28 @@ export class ShiftsComponent implements OnInit {
     return this.shiftsData.map(s => ({ name: s.turnista, group: s.tipo_turnista }));
   }
 
-  public getShiftsInfo(manName: string): { text: string; tooltip: string }[] {
-    const emptyResult = { text: '', tooltip: '' };
-    const result: { text: string; tooltip: string }[] = [];
+  public getShiftsInfo(manName: string): { text: string; tooltip: string; holyday: boolean }[] {
+    const result: { text: string; tooltip: string; holyday: boolean }[] = [];
     const manShifts = this.shiftsData
       .find(s => s.turnista === manName);
 
     if (!manShifts) {
-      this.calendar().forEach(date => {
-        result.push(emptyResult);
+      this.calendar().forEach(info => {
+        result.push({ text: '', tooltip: '', holyday: info.holyday });
       });
 
       return result;
     }
 
-    this.calendar().forEach(date => {
+    this.calendar().forEach(info => {
       const dayShift = manShifts.presenze
-        .find(d => d.data.valueOf() === date.valueOf());
+        .find(d => d.data.valueOf() === info.day.valueOf());
       if (!dayShift) {
-        result.push(emptyResult);
+        result.push({ text: '', tooltip: '', holyday: info.holyday });
       } else {
-        result.push({ text: dayShift.turno_abbr, tooltip: dayShift.turno });
+        result.push({ text: dayShift.turno_abbr, tooltip: dayShift.turno, holyday: info.holyday });
       }
     });
-    console.log(result);
     return result;
   }
 
@@ -60,7 +58,11 @@ export class ShiftsComponent implements OnInit {
     this.toDate = new Date(curDate.getFullYear(), curDate.getMonth() + 1, 0);
   }
 
-  public calendar(): Date[] {
+  private dateToObj(day: Date): { day: Date; holyday: boolean } {
+    const holyday = [0, 6].indexOf(day.getDay()) >= 0;
+    return {day, holyday };
+  }
+  public calendar(): { day: Date; holyday: boolean }[] {
     const year = this.fromDate.getFullYear();
     const month = this.fromDate.getMonth();
     let day = this.fromDate.getDate();
@@ -70,7 +72,7 @@ export class ShiftsComponent implements OnInit {
       result.push(new Date(year, month, ++day));
     }
 
-    return result;
+    return result.map(d => this.dateToObj(d));
   }
 
   public dateToStr(d: Date): string {

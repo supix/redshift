@@ -1,6 +1,7 @@
 .shifts-table {
     color: rgb(80, 80, 80);
 }
+
 .shifts-table th {
     font-size: x-small;
     font-weight: normal;
@@ -8,4 +9,8 @@
 
 .shifts-table th.man-name {
     min-width: 30ex;
+}
+
+.holyday {
+    background: repeating-linear-gradient( 40deg, transparent, transparent 10px, #eee 10px, #ddd 20px)
 }

@@ -2,7 +2,7 @@
     <thead>
         <tr>
             <th scope="col" ></th>
-            <th *ngFor="let d of calendar()" scope="col" class="text-center">{{ dateToStr(d) }}</th>
+            <th *ngFor="let dayInfo of calendar()" scope="col" class="text-center" [ngClass]="{holyday: dayInfo.holyday}">{{ dateToStr(dayInfo.day) }}</th>
         </tr>
     </thead>
     <tbody>
@@ -14,7 +14,7 @@
                     {{ info.name }}
                 </div>
             </th>
-            <td *ngFor="let s of getShiftsInfo(info.name)" class="text-center" title="{{ s.tooltip }}">{{ s.text }}</td>
+            <td *ngFor="let shiftInfo of getShiftsInfo(info.name)" class="text-center" [ngClass]="{holyday: shiftInfo.holyday}" title="{{ shiftInfo.tooltip }}">{{ shiftInfo.text }}</td>
         </tr>
     </tbody>
 </table>
