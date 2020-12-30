@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { faCheckCircle, faTimes, faPen, faUser } from '@fortawesome/free-solid-svg-icons';
 import { ManShift } from 'src/app/models/shifts/ManShift';
 import { ShiftsService } from 'src/app/services/shifts/shifts.service';
 import { ActivatedRoute } from '@angular/router';
@@ -14,7 +14,11 @@ export class ShiftsComponent implements OnInit {
   private toDate: Date;
   private shiftsData: ManShift[];
   private groups: string[];
+  private editingMan: string = null;
   faUser = faUser;
+  faPen = faPen;
+  faCheckCircle = faCheckCircle;
+  faTimes = faTimes;
 
   constructor(
     private shiftsService: ShiftsService,
@@ -125,5 +129,34 @@ export class ShiftsComponent implements OnInit {
     const dayName = dayNames[d.getDay()];
 
     return dayName + ' ' + [day, month].join('/');
+  }
+
+  /**
+   * Returns the name of the man currently being edited
+   */
+  public get nowEditingMan(): string {
+    return this.editingMan;
+  }
+
+  /**
+   * Enters the edit mode
+   * @param man The man being edited
+   */
+  public editMan(man: string): void {
+    this.editingMan = man;
+  }
+
+  /**
+   * Save the changes to the man shifts and exits the edit mode
+   */
+  public saveChanges(): void {
+    this.editingMan = null;
+  }
+
+  /**
+   * Cancel the changes to the man shifts and exits the edit mode
+   */
+  public cancelChanges(): void {
+    this.editingMan = null;
   }
 }
