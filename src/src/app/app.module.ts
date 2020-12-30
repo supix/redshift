@@ -8,6 +8,7 @@ import { ShiftsComponent } from './components/shifts/shifts.component';
 import { ShiftsService } from './services/shifts/shifts.service';
 import { ShiftsFakeService } from './services/shifts/shifts.fake.service';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     NavbarComponent
   ],
   imports: [
+    RouterModule.forRoot([]),
     BrowserModule,
     FontAwesomeModule,
     NgbModule

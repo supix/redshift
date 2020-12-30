@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { ManShift } from 'src/app/models/shifts/ManShift';
 import { ShiftsService } from 'src/app/services/shifts/shifts.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-shifts',
@@ -12,7 +13,24 @@ export class ShiftsComponent implements OnInit {
   private fromDate: Date;
   private toDate: Date;
   private shiftsData: ManShift[];
+  private groups: string[];
   faUser = faUser;
+
+  constructor(
+    private shiftsService: ShiftsService,
+    private route: ActivatedRoute) {
+  }
+
+  ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      this.groups = !!params.group ?
+        Array.isArray(params.group) ? params.group : [params.group]
+        : [];
+      this.initDates();
+      this.shiftsService.shifts$(this.fromDate, this.toDate, this.groups)
+        .subscribe(s => this.shiftsData = s);
+    });
+  }
 
   public manInfo(): { name: string; group: string }[] {
     return this.shiftsData.map(s => ({ name: s.turnista, group: s.tipo_turnista }));
@@ -43,15 +61,6 @@ export class ShiftsComponent implements OnInit {
     return result;
   }
 
-  constructor(public shiftsService: ShiftsService) {
-  }
-
-  ngOnInit(): void {
-    this.initDates();
-    this.shiftsService.shifts$(this.fromDate, this.toDate, ['Esterno', 'Interno'])
-      .subscribe(s => this.shiftsData = s);
-  }
-
   private initDates(): void {
     const curDate = new Date();
     this.fromDate = new Date(curDate.getFullYear(), curDate.getMonth(), 1);
@@ -60,7 +69,7 @@ export class ShiftsComponent implements OnInit {
 
   private dateToObj(day: Date): { day: Date; holyday: boolean } {
     const holyday = [0, 6].indexOf(day.getDay()) >= 0;
-    return {day, holyday };
+    return { day, holyday };
   }
   public calendar(): { day: Date; holyday: boolean }[] {
     const year = this.fromDate.getFullYear();
