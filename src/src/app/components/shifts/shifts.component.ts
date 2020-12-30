@@ -12,13 +12,13 @@ export class ShiftsComponent implements OnInit {
   private toDate: Date;
   private shiftsData: ManShift[];
 
-  public manInfo() {
+  public manInfo(): { name: string; group: string }[] {
     return this.shiftsData.map(s => ({ name: s.turnista, group: s.tipo_turnista }));
   }
 
-  public getShiftsInfo(manName: string) {
+  public getShiftsInfo(manName: string): { text: string; tooltip: string }[] {
     const emptyResult = { text: '', tooltip: '' };
-    const result = [];
+    const result: { text: string; tooltip: string }[] = [];
     const manShifts = this.shiftsData
       .find(s => s.turnista === manName);
 
