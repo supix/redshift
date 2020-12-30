@@ -9,7 +9,7 @@ export class ShiftsService {
 
   constructor() { }
 
-  public shifts$(fromDate: Date, toDate: Date): Observable<ManShift[]> {
+  public shifts$(fromDate: Date, toDate: Date, manGroups: string[]): Observable<ManShift[]> {
     throw new Error('Method not implemented');
   }
 }

@@ -39,7 +39,7 @@ export class ShiftsComponent implements OnInit {
 
   ngOnInit(): void {
     this.initDates();
-    this.shiftsService.shifts$(this.fromDate, this.toDate)
+    this.shiftsService.shifts$(this.fromDate, this.toDate, ['Esterno', 'Interno'])
       .subscribe(s => this.shiftsData = s);
   }
 

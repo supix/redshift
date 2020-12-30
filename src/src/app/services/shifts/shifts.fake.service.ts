@@ -106,7 +106,7 @@ export class ShiftsFakeService {
 
   constructor() { }
 
-  public shifts$(fromDate: Date, toDate: Date): Observable<ManShift[]> {
-    return of(fakeData);
+  public shifts$(fromDate: Date, toDate: Date, manGroups: string[]): Observable<ManShift[]> {
+    return of(fakeData.filter(ms => !!manGroups.find(mg => mg === ms.tipo_turnista)));
   }
 }
