@@ -7,11 +7,13 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ShiftsComponent } from './components/shifts/shifts.component';
 import { ShiftsService } from './services/shifts/shifts.service';
 import { ShiftsFakeService } from './services/shifts/shifts.fake.service';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ShiftsComponent
+    ShiftsComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { ManShift } from 'src/app/models/shifts/ManShift';
 import { ShiftsService } from 'src/app/services/shifts/shifts.service';
 
@@ -11,6 +12,7 @@ export class ShiftsComponent implements OnInit {
   private fromDate: Date;
   private toDate: Date;
   private shiftsData: ManShift[];
+  faUser = faUser;
 
   public manInfo(): { name: string; group: string }[] {
     return this.shiftsData.map(s => ({ name: s.turnista, group: s.tipo_turnista }));

@@ -1,8 +1,11 @@
+.shifts-table {
+    color: rgb(80, 80, 80);
+}
 .shifts-table th {
-    font-size: small;
+    font-size: x-small;
     font-weight: normal;
 }
 
 .shifts-table th.man-name {
-    width: 25ex;
+    min-width: 30ex;
 }
