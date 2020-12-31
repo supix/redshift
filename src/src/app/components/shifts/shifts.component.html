@@ -36,7 +36,7 @@
                 [ngClass]="{holyday: shiftInfo.holyday}" title="{{ shiftInfo.tooltip }}">
                 <span *ngIf="nowEditingMan != info.name">{{ shiftInfo.text }}</span>
                 <span *ngIf="nowEditingMan === info.name">
-                    <app-shift-editor [curShift]="shiftInfo.text" [allShifts]="allShifts"></app-shift-editor>
+                    <app-shift-editor [editHandler]="{ manName: info.name, day: shiftInfo.day }" [curShift]="shiftInfo.text" [allShifts]="allShifts"></app-shift-editor>
                 </span>
             </td>
         </tr>

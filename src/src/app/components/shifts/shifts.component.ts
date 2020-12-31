@@ -49,14 +49,14 @@ export class ShiftsComponent implements OnInit {
    * Extracts shifts information from the shifts data
    * @returns an array as long as the interval between fromDate and toDate
    */
-  public getShiftsInfo(manName: string): { text: string; tooltip: string; holyday: boolean }[] {
-    const result: { text: string; tooltip: string; holyday: boolean }[] = [];
+  public getShiftsInfo(manName: string): { text: string; tooltip: string; holyday: boolean, day: Date }[] {
+    const result: { text: string; tooltip: string; holyday: boolean, day: Date }[] = [];
     const manShifts = this.shiftsData
       .find(s => s.turnista === manName);
 
     if (!manShifts) {
       this.calendar().forEach(info => {
-        result.push({ text: '', tooltip: '', holyday: info.holyday });
+        result.push({ text: '', tooltip: '', holyday: info.holyday, day: null });
       });
 
       return result;
@@ -66,9 +66,9 @@ export class ShiftsComponent implements OnInit {
       const dayShift = manShifts.presenze
         .find(d => d.data.valueOf() === info.day.valueOf());
       if (!dayShift) {
-        result.push({ text: '', tooltip: '', holyday: info.holyday });
+        result.push({ text: '', tooltip: '', holyday: info.holyday, day: info.day });
       } else {
-        result.push({ text: dayShift.turno_abbr, tooltip: dayShift.turno, holyday: info.holyday });
+        result.push({ text: dayShift.turno_abbr, tooltip: dayShift.turno, holyday: info.holyday, day: info.day });
       }
     });
     return result;
