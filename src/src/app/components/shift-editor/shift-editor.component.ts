@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-shift-editor',
@@ -6,10 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./shift-editor.component.css']
 })
 export class ShiftEditorComponent implements OnInit {
-
+@Input() curShift: string;
+@Input() allShifts: string[];
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.curShift, this.allShifts);
   }
-
 }

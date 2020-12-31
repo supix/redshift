@@ -10,6 +10,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./shifts.component.css']
 })
 export class ShiftsComponent implements OnInit {
+  public readonly allShifts = [ 'C', 'M', 'P', 'N', 'D', 'F'];
   private fromDate: Date;
   private toDate: Date;
   private shiftsData: ManShift[];
