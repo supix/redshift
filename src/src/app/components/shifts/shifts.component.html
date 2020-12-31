@@ -36,15 +36,7 @@
                 [ngClass]="{holyday: shiftInfo.holyday}" title="{{ shiftInfo.tooltip }}">
                 <span *ngIf="nowEditingMan != info.name">{{ shiftInfo.text }}</span>
                 <span *ngIf="nowEditingMan === info.name">
-                    <select class="form-control form-control-sm p-0 m-0">
-                        <option></option>
-                        <option>C</option>
-                        <option>M</option>
-                        <option>P</option>
-                        <option>N</option>
-                        <option>F</option>
-                        <option>D</option>
-                    </select>
+                    <app-shift-editor></app-shift-editor>
                 </span>
             </td>
         </tr>
