@@ -1,4 +1,4 @@
-<select class="form-control form-control-sm p-0 m-0">
+<select class="form-control form-control-sm p-0 m-0" (change)="onChanged($event.target.value)">
     <option></option>
     <option *ngFor="let s of allShifts" [selected]="!!curShift && s === curShift">{{ s }}</option>
 </select>

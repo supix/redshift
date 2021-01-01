@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-shift-editor',
@@ -9,9 +9,14 @@ export class ShiftEditorComponent implements OnInit {
 @Input() editHandler: { manName: string; day: Date };
 @Input() curShift: string;
 @Input() allShifts: string[];
+@Output() shiftChanged = new EventEmitter<{ manName: string; day: Date; newShift: string }>();
+
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.editHandler, this.curShift, this.allShifts);
+  }
+
+  onChanged(event): void {
+    this.shiftChanged.emit({ manName: this.editHandler.manName, day: this.editHandler.day, newShift: event});
   }
 }

@@ -149,4 +149,8 @@ export class ShiftsComponent implements OnInit {
       default: return 'bg-secondary';
     }
   }
+
+  public onShiftChanged(object) {
+    console.log(object);
+  }
 }
