@@ -8,7 +8,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let info of manInfo()">
+        <tr *ngFor="let info of manInfo(); trackBy:identifyManInfo">
             <th scope="row">
                 <span [ngClass]="cssClassByGroup(info.group)" class="badge m-1">{{ info.group }}</span>
             </th>
@@ -32,7 +32,7 @@
                     {{ info.name }}
                 </div>
             </th>
-            <td *ngFor="let shiftInfo of getShiftsInfo(info.name)" class="text-center"
+            <td *ngFor="let shiftInfo of getShiftsInfo(info.name); trackBy:identifyShiftInfo" class="text-center"
                 [ngClass]="{holyday: shiftInfo.holyday}" title="{{ shiftInfo.tooltip }}">
                 <span *ngIf="nowEditingMan != info.name">{{ shiftInfo.text }}</span>
                 <span *ngIf="nowEditingMan === info.name">

@@ -10,12 +10,13 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./shifts.component.css']
 })
 export class ShiftsComponent implements OnInit {
-  public readonly allShifts = [ 'C', 'M', 'P', 'N', 'D', 'F'];
+  public readonly allShifts = ['C', 'M', 'P', 'N', 'D', 'F'];
   private fromDate: Date;
   private toDate: Date;
   private shiftsData: ManShift[];
   private groups: string[];
   private editingMan: string = null;
+  private pendingChanges: { day: Date; newShift: string }[] = [];
   faUser = faUser;
   faPen = faPen;
   faCheckCircle = faCheckCircle;
@@ -122,6 +123,7 @@ export class ShiftsComponent implements OnInit {
    */
   public editMan(man: string): void {
     this.editingMan = man;
+    this.pendingChanges = [];
   }
 
   /**
@@ -129,6 +131,8 @@ export class ShiftsComponent implements OnInit {
    */
   public saveChanges(): void {
     this.editingMan = null;
+    console.log('now should save this changes', this.pendingChanges);
+    this.pendingChanges = [];
   }
 
   /**
@@ -136,6 +140,8 @@ export class ShiftsComponent implements OnInit {
    */
   public cancelChanges(): void {
     this.editingMan = null;
+    console.log('these changes are going to be canceled', this.pendingChanges);
+    this.pendingChanges = [];
   }
 
   /**
@@ -143,14 +149,29 @@ export class ShiftsComponent implements OnInit {
    * @param c The man class
    */
   public cssClassByGroup(c: string): string {
-    switch(c) {
+    switch (c) {
       case 'Interno': return 'badge-success';
       case 'Esterno': return 'badge-warning';
       default: return 'bg-secondary';
     }
   }
 
-  public onShiftChanged(object) {
-    console.log(object);
+  public onShiftChanged(newValue) {
+    let value = this.pendingChanges.find(c => c.day.valueOf() === newValue.day.valueOf());
+    if (!value) {
+      value = { day: newValue.day, newShift: newValue.newShift };
+      this.pendingChanges.push(value);
+    } else {
+      value.newShift = newValue.newShift;
+    }
+    console.log(this.pendingChanges);
+  }
+
+  public identifyShiftInfo(_index, item): number {
+    return item.day.getTime();
+  }
+
+  public identifyManInfo(_index, item): string {
+    return item.name;
   }
 }
