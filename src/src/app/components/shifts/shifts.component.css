@@ -21,6 +21,10 @@
     filter: drop-shadow(.5ex .5ex .5ex rgb(139, 131, 116));
 }
 
+.shifts-table th.notCurMonth {
+    background-color: #eee;
+}
+
 .shifts-table .notCurMonth {
     filter: blur(1px) brightness(105%);
 }
