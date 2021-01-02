@@ -156,6 +156,13 @@ export class ShiftsComponent implements OnInit {
     }
   }
 
+  /**
+   * Event handler called when a select value is changed by the user.
+   * The method tracks the changes and prepares a data structure
+   * useful to send the tracked changes to the backend on save
+   * request.
+   * @param newValue information about the new value
+   */
   public onShiftChanged(newValue) {
     let value = this.pendingChanges.find(c => c.day.valueOf() === newValue.day.valueOf());
     if (!value) {
