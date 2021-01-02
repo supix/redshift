@@ -80,8 +80,8 @@ export class ShiftsComponent implements OnInit {
    */
   private initDates(): void {
     const curDate = new Date();
-    this.fromDate = new Date(curDate.getFullYear(), curDate.getMonth(), 1);
-    this.toDate = new Date(curDate.getFullYear(), curDate.getMonth() + 1, 0);
+    this.fromDate = new Date(curDate.getFullYear(), curDate.getMonth(), -6);
+    this.toDate = new Date(curDate.getFullYear(), curDate.getMonth() + 1, 6);
   }
 
   /**
