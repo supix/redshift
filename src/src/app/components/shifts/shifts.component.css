@@ -18,7 +18,7 @@
 .shifts-table .today {
     font-weight: bold;
     color: rgb(105, 68, 0);
-    filter: drop-shadow(.5ex .5ex .5ex rgb(226, 147, 0));
+    filter: drop-shadow(.5ex .5ex .5ex rgb(139, 131, 116));
 }
 
 .shifts-table .holyday {

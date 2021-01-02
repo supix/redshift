@@ -3,6 +3,7 @@ import { faCheckCircle, faTimes, faPen, faUser } from '@fortawesome/free-solid-s
 import { ManShift } from 'src/app/models/shifts/ManShift';
 import { ShiftsService } from 'src/app/services/shifts/shifts.service';
 import { ActivatedRoute } from '@angular/router';
+import { DayInfo } from './DayInfo';
 
 @Component({
   selector: 'app-shifts',
@@ -88,18 +89,18 @@ export class ShiftsComponent implements OnInit {
    * converts a date in a dat object
    * @returns an objects carrying the holiday information as well
    */
-  private dateToObj(day: Date): { day: Date; holyday: boolean; today: boolean } {
+  private dateToObj(day: Date): DayInfo {
     const holyday = [0, 6].indexOf(day.getDay()) >= 0;
     const today = new Date((new Date()).getTime());
     today.setHours(0, 0, 0, 0);
-    return { day, holyday, today: day.valueOf() === today.valueOf() };
+    return new DayInfo(day, holyday, day.valueOf() === today.valueOf(), day.getMonth() === today.getMonth());
   }
 
   /**
    * Creates an array of days, as long as the interval between fromDate and toDate
    * @returns the array
    */
-  public calendar(): { day: Date; holyday: boolean; today: boolean }[] {
+  public calendar(): DayInfo[] {
     const year = this.fromDate.getFullYear();
     const month = this.fromDate.getMonth();
     let day = this.fromDate.getDate();
@@ -184,3 +185,5 @@ export class ShiftsComponent implements OnInit {
     return item.name;
   }
 }
+
+
