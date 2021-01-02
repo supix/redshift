@@ -33,10 +33,10 @@
                 </div>
             </th>
             <td *ngFor="let shiftInfo of getShiftsInfo(info.name); trackBy:identifyShiftInfo" class="text-center"
-                [ngClass]="{holyday: shiftInfo.holyday, today: shiftInfo.today}" title="{{ shiftInfo.tooltip }}">
+                [ngClass]="{holyday: shiftInfo.dayInfo.holyday, today: shiftInfo.dayInfo.today}" title="{{ shiftInfo.tooltip }}">
                 <span *ngIf="nowEditingMan != info.name">{{ shiftInfo.text }}</span>
                 <span *ngIf="nowEditingMan === info.name">
-                    <app-shift-editor [editHandler]="{ manName: info.name, day: shiftInfo.day }"
+                    <app-shift-editor [editHandler]="{ manName: info.name, day: shiftInfo.dayInfo.day }"
                         [curShift]="shiftInfo.text" [allShifts]="allShifts" (shiftChanged)="onShiftChanged($event)">
                     </app-shift-editor>
                 </span>
