@@ -4,7 +4,7 @@
             <th scope="col"></th>
             <th scope="col"></th>
             <th *ngFor="let dayInfo of calendar()" scope="col" class="text-center"
-                [ngClass]="{holyday: dayInfo.holyday}">{{ dayInfo.day | dtos }}</th>
+                [ngClass]="{holyday: dayInfo.holyday, today: dayInfo.today}">{{ dayInfo.day | dtos }}</th>
         </tr>
     </thead>
     <tbody>
@@ -33,12 +33,12 @@
                 </div>
             </th>
             <td *ngFor="let shiftInfo of getShiftsInfo(info.name); trackBy:identifyShiftInfo" class="text-center"
-                [ngClass]="{holyday: shiftInfo.holyday}" title="{{ shiftInfo.tooltip }}">
+                [ngClass]="{holyday: shiftInfo.holyday, today: shiftInfo.today}" title="{{ shiftInfo.tooltip }}">
                 <span *ngIf="nowEditingMan != info.name">{{ shiftInfo.text }}</span>
                 <span *ngIf="nowEditingMan === info.name">
                     <app-shift-editor [editHandler]="{ manName: info.name, day: shiftInfo.day }"
-                        [curShift]="shiftInfo.text" [allShifts]="allShifts"
-                        (shiftChanged)="onShiftChanged($event)"></app-shift-editor>
+                        [curShift]="shiftInfo.text" [allShifts]="allShifts" (shiftChanged)="onShiftChanged($event)">
+                    </app-shift-editor>
                 </span>
             </td>
         </tr>

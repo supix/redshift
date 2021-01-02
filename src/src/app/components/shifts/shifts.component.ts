@@ -50,14 +50,14 @@ export class ShiftsComponent implements OnInit {
    * Extracts shifts information from the shifts data
    * @returns an array as long as the interval between fromDate and toDate
    */
-  public getShiftsInfo(manName: string): { text: string; tooltip: string; holyday: boolean, day: Date }[] {
-    const result: { text: string; tooltip: string; holyday: boolean, day: Date }[] = [];
+  public getShiftsInfo(manName: string): { text: string; tooltip: string; holyday: boolean; today: boolean; day: Date }[] {
+    const result: { text: string; tooltip: string; holyday: boolean; today: boolean; day: Date }[] = [];
     const manShifts = this.shiftsData
       .find(s => s.turnista === manName);
 
     if (!manShifts) {
       this.calendar().forEach(info => {
-        result.push({ text: '', tooltip: '', holyday: info.holyday, day: null });
+        result.push({ text: '', tooltip: '', holyday: info.holyday, today: info.today, day: null });
       });
 
       return result;
@@ -67,9 +67,9 @@ export class ShiftsComponent implements OnInit {
       const dayShift = manShifts.presenze
         .find(d => d.data.valueOf() === info.day.valueOf());
       if (!dayShift) {
-        result.push({ text: '', tooltip: '', holyday: info.holyday, day: info.day });
+        result.push({ text: '', tooltip: '', holyday: info.holyday, today: info.today, day: info.day });
       } else {
-        result.push({ text: dayShift.turno_abbr, tooltip: dayShift.turno, holyday: info.holyday, day: info.day });
+        result.push({ text: dayShift.turno_abbr, tooltip: dayShift.turno, holyday: info.holyday, today: info.today, day: info.day });
       }
     });
     return result;
@@ -88,16 +88,18 @@ export class ShiftsComponent implements OnInit {
    * converts a date in a dat object
    * @returns an objects carrying the holiday information as well
    */
-  private dateToObj(day: Date): { day: Date; holyday: boolean } {
+  private dateToObj(day: Date): { day: Date; holyday: boolean; today: boolean } {
     const holyday = [0, 6].indexOf(day.getDay()) >= 0;
-    return { day, holyday };
+    const today = new Date((new Date()).getTime());
+    today.setHours(0, 0, 0, 0);
+    return { day, holyday, today: day.valueOf() === today.valueOf() };
   }
 
   /**
    * Creates an array of days, as long as the interval between fromDate and toDate
    * @returns the array
    */
-  public calendar(): { day: Date; holyday: boolean }[] {
+  public calendar(): { day: Date; holyday: boolean; today: boolean }[] {
     const year = this.fromDate.getFullYear();
     const month = this.fromDate.getMonth();
     let day = this.fromDate.getDate();

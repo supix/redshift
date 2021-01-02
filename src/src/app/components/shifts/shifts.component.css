@@ -15,6 +15,12 @@
     background: #eee;
 }
 
+.shifts-table .today {
+    font-weight: bold;
+    color: rgb(105, 68, 0);
+    filter: drop-shadow(.5ex .5ex .5ex rgb(226, 147, 0));
+}
+
 .shifts-table .holyday {
     background: repeating-linear-gradient( 40deg, transparent, transparent 10px, #fff 10px, #eee 20px)
 }
