@@ -177,10 +177,20 @@ export class ShiftsComponent implements OnInit {
     console.log(this.pendingChanges);
   }
 
+  /**
+   * Track method used by *ngFor iterating over getShiftsInfo()
+   * @param _index
+   * @param item 
+   */
   public identifyShiftInfo(_index, item): number {
     return item.dayInfo.day.getTime();
   }
 
+  /**
+   * Track method used by *ngFor iterating over manInfo()
+   * @param _index
+   * @param item 
+   */
   public identifyManInfo(_index, item): string {
     return item.name;
   }
