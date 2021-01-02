@@ -21,6 +21,10 @@
     filter: drop-shadow(.5ex .5ex .5ex rgb(139, 131, 116));
 }
 
+.shifts-table .notCurMonth {
+    filter: blur(1px) brightness(105%);
+}
+
 .shifts-table .holyday {
     background: repeating-linear-gradient( 40deg, transparent, transparent 10px, #fff 10px, #eee 20px)
 }
