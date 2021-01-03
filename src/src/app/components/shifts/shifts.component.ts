@@ -4,6 +4,7 @@ import { ManShift } from 'src/app/models/shifts/ManShift';
 import { ShiftsService } from 'src/app/services/shifts/shifts.service';
 import { ActivatedRoute } from '@angular/router';
 import { DayInfo } from './DayInfo';
+import { AuthorizationDeskService } from 'src/app/services/autorizationDesk/authorization-desk.service';
 
 @Component({
   selector: 'app-shifts',
@@ -25,6 +26,7 @@ export class ShiftsComponent implements OnInit {
 
   constructor(
     private shiftsService: ShiftsService,
+    private authorizationDeskService: AuthorizationDeskService,
     private route: ActivatedRoute) {
   }
 
@@ -179,8 +181,6 @@ export class ShiftsComponent implements OnInit {
 
   /**
    * Track method used by *ngFor iterating over getShiftsInfo()
-   * @param _index
-   * @param item 
    */
   public identifyShiftInfo(_index, item): number {
     return item.dayInfo.day.getTime();
@@ -188,11 +188,18 @@ export class ShiftsComponent implements OnInit {
 
   /**
    * Track method used by *ngFor iterating over manInfo()
-   * @param _index
-   * @param item 
    */
   public identifyManInfo(_index, item): string {
     return item.name;
+  }
+
+  /**
+   * Allows the template to know whether the authenticated user has
+   * write privileges on a certain shift.
+   * @param manName The name of the man the shifts belong to
+   */
+  public canEditShifts(manName: string): boolean {
+    return this.authorizationDeskService.canEditShifts(manName);
   }
 }
 

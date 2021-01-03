@@ -4,7 +4,8 @@
             <th scope="col"></th>
             <th scope="col"></th>
             <th *ngFor="let dayInfo of calendar()" scope="col" class="text-center"
-                [ngClass]="{holyday: dayInfo.holyday, today: dayInfo.today, notCurMonth: !dayInfo.curMonth}">{{ dayInfo.day | dtos }}</th>
+                [ngClass]="{holyday: dayInfo.holyday, today: dayInfo.today, notCurMonth: !dayInfo.curMonth}">{{
+                dayInfo.day | dtos }}</th>
         </tr>
     </thead>
     <tbody>
@@ -13,19 +14,21 @@
                 <span [ngClass]="cssClassByGroup(info.group)" class="badge m-1">{{ info.group }}</span>
             </th>
             <th scope="row" class="man-name">
-                <button *ngIf="!nowEditingMan" type="button" class="btn btn-link btn-sm float-right p-0"
-                    (click)="editMan(info.name)">
-                    <fa-icon class="" [icon]="faPen"></fa-icon>
-                </button>
-                <span *ngIf="nowEditingMan == info.name">
-                    <button type="button" class="text-secondary btn btn-link btn-sm float-right p-0"
-                        (click)="cancelChanges()">
-                        <fa-icon class="fa-lg" [icon]="faTimes"></fa-icon>
+                <span *ngIf="canEditShifts(info.name)">
+                    <button *ngIf="!nowEditingMan" type="button" class="btn btn-link btn-sm float-right p-0"
+                        (click)="editMan(info.name)">
+                        <fa-icon class="" [icon]="faPen"></fa-icon>
                     </button>
-                    <button type="button" class="text-success btn btn-link btn-sm float-right p-0 mr-1"
-                        (click)="saveChanges()">
-                        <fa-icon class="fa-lg" [icon]="faCheckCircle"></fa-icon>
-                    </button>
+                    <span *ngIf="nowEditingMan == info.name">
+                        <button type="button" class="text-secondary btn btn-link btn-sm float-right p-0"
+                            (click)="cancelChanges()">
+                            <fa-icon class="fa-lg" [icon]="faTimes"></fa-icon>
+                        </button>
+                        <button type="button" class="text-success btn btn-link btn-sm float-right p-0 mr-1"
+                            (click)="saveChanges()">
+                            <fa-icon class="fa-lg" [icon]="faCheckCircle"></fa-icon>
+                        </button>
+                    </span>
                 </span>
                 <div class="">
                     <fa-icon [icon]="faUser"></fa-icon>
@@ -33,7 +36,8 @@
                 </div>
             </th>
             <td *ngFor="let shiftInfo of getShiftsInfo(info.name); trackBy:identifyShiftInfo" class="text-center"
-                [ngClass]="{holyday: shiftInfo.dayInfo.holyday, today: shiftInfo.dayInfo.today, notCurMonth: !shiftInfo.dayInfo.curMonth}" title="{{ shiftInfo.tooltip }}">
+                [ngClass]="{holyday: shiftInfo.dayInfo.holyday, today: shiftInfo.dayInfo.today, notCurMonth: !shiftInfo.dayInfo.curMonth}"
+                title="{{ shiftInfo.tooltip }}">
                 <span *ngIf="nowEditingMan != info.name">{{ shiftInfo.text }}</span>
                 <span *ngIf="nowEditingMan === info.name">
                     <app-shift-editor [editHandler]="{ manName: info.name, day: shiftInfo.dayInfo.day }"

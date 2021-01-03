@@ -11,6 +11,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { RouterModule } from '@angular/router';
 import { DtosPipe } from './pipes/dtos/dtos.pipe';
 import { ShiftEditorComponent } from './components/shift-editor/shift-editor.component';
+import { AuthorizationDeskService } from './services/autorizationDesk/authorization-desk.service';
+import { AuthorizationDeskFakeService } from './services/autorizationDesk/authorization-desk-service.fake.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,10 @@ import { ShiftEditorComponent } from './components/shift-editor/shift-editor.com
     FontAwesomeModule,
     NgbModule
   ],
-  providers: [ { provide: ShiftsService, useClass: ShiftsFakeService }],
+  providers: [ 
+    { provide: ShiftsService, useClass: ShiftsFakeService },
+    { provide: AuthorizationDeskService, useClass: AuthorizationDeskFakeService }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
