@@ -1,4 +1,3 @@
-import { WeekDay } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Day } from 'src/app/models/day/day';
@@ -7,7 +6,7 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class CalendarServiceFake {
+export class CalendarFakeService {
 
   constructor() { }
 
