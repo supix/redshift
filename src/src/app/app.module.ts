@@ -13,6 +13,8 @@ import { DtosPipe } from './pipes/dtos/dtos.pipe';
 import { ShiftEditorComponent } from './components/shift-editor/shift-editor.component';
 import { AuthorizationDeskService } from './services/autorizationDesk/authorization-desk.service';
 import { AuthorizationDeskFakeService } from './services/autorizationDesk/authorization-desk-service.fake.service';
+import { CalendarService } from './services/calendar/calendar.service';
+import { CalendarFakeService } from './services/calendar/calendar.service.fake';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,7 @@ import { AuthorizationDeskFakeService } from './services/autorizationDesk/author
     NgbModule
   ],
   providers: [ 
+    { provide: CalendarService, useClass: CalendarFakeService },
     { provide: ShiftsService, useClass: ShiftsFakeService },
     { provide: AuthorizationDeskService, useClass: AuthorizationDeskFakeService }
   ],

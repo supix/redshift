@@ -6,6 +6,8 @@ import { ActivatedRoute } from '@angular/router';
 import { DayInfo } from './DayInfo';
 import { AuthorizationDeskService } from 'src/app/services/autorizationDesk/authorization-desk.service';
 import { ManInfo } from './ManInfo';
+import { forkJoin, Observable } from 'rxjs';
+import { CalendarService } from 'src/app/services/calendar/calendar.service';
 
 @Component({
   selector: 'app-shifts',
@@ -26,9 +28,10 @@ export class ShiftsComponent implements OnInit {
   faTimes = faTimes;
 
   constructor(
-    private shiftsService: ShiftsService,
-    private authorizationDeskService: AuthorizationDeskService,
-    private route: ActivatedRoute) {
+    private readonly calendarService: CalendarService,
+    private readonly shiftsService: ShiftsService,
+    private readonly authorizationDeskService: AuthorizationDeskService,
+    private readonly route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
@@ -37,8 +40,13 @@ export class ShiftsComponent implements OnInit {
         Array.isArray(params.group) ? params.group : [params.group]
         : [];
       this.initDates();
-      this.shiftsService.shifts$(this.fromDate, this.toDate, this.groups)
-        .subscribe(s => this.shiftsData = s);
+      const shifts$ = this.shiftsService.shifts$(this.fromDate, this.toDate, this.groups);
+      const calendar$ = this.calendarService.calendar$(this.fromDate, this.toDate);
+
+      forkJoin([shifts$, calendar$]).subscribe(result => {
+        this.shiftsData = result[0];
+        // here the calendar observable must be handled
+      });
     });
   }
 
