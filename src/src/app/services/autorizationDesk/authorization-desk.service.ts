@@ -7,7 +7,7 @@ export class AuthorizationDeskService {
 
   constructor() { }
 
-  public canEditShifts(manName: string): boolean {
+  public canEditShifts(manCode: string): boolean {
     throw new Error('Method not implemented');
   }
 }

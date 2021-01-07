@@ -6,10 +6,10 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   styleUrls: ['./shift-editor.component.css']
 })
 export class ShiftEditorComponent implements OnInit {
-@Input() editHandler: { manName: string; day: Date };
+@Input() editHandler: { manCode: string; day: Date };
 @Input() curShift: string;
 @Input() allShifts: string[];
-@Output() shiftChanged = new EventEmitter<{ manName: string; day: Date; newShift: string }>();
+@Output() shiftChanged = new EventEmitter<{ manCode: string; day: Date; newShift: string }>();
 
   constructor() { }
 
@@ -17,6 +17,6 @@ export class ShiftEditorComponent implements OnInit {
   }
 
   onChanged(event): void {
-    this.shiftChanged.emit({ manName: this.editHandler.manName, day: this.editHandler.day, newShift: event});
+    this.shiftChanged.emit({ manCode: this.editHandler.manCode, day: this.editHandler.day, newShift: event});
   }
 }

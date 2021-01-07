@@ -7,12 +7,12 @@ export class AuthorizationDeskFakeService {
 
   constructor() { }
 
-  public canEditShifts(manName: string): boolean {
-    const manNamesAllowedToBeEdited = [
-      'Mario Rossi',
-      'Giuseppe Verdi'
+  public canEditShifts(manCode: string): boolean {
+    const manNCodesAllowedToBeEdited = [
+      'MAN001',
+      'MAN003'
     ];
-    if (manNamesAllowedToBeEdited.includes(manName)) {
+    if (manNCodesAllowedToBeEdited.includes(manCode)) {
       return true;
     }
   }

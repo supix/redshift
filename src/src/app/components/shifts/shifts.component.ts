@@ -5,6 +5,7 @@ import { ShiftsService } from 'src/app/services/shifts/shifts.service';
 import { ActivatedRoute } from '@angular/router';
 import { DayInfo } from './DayInfo';
 import { AuthorizationDeskService } from 'src/app/services/autorizationDesk/authorization-desk.service';
+import { ManInfo } from './ManInfo';
 
 @Component({
   selector: 'app-shifts',
@@ -17,8 +18,8 @@ export class ShiftsComponent implements OnInit {
   private toDate: Date;
   private shiftsData: ManShift[];
   private groups: string[];
-  private editingMan: string = null;
-  private pendingChanges: { day: Date; newShift: string }[] = [];
+  private editingManCode: string = null;
+  private pendingChanges: { manCode: string; day: Date; newShift: string }[] = [];
   faUser = faUser;
   faPen = faPen;
   faCheckCircle = faCheckCircle;
@@ -45,18 +46,18 @@ export class ShiftsComponent implements OnInit {
    * Maps the shifts data to an array of objects read by the DOM
    * @returns an array of objects with the man information, to be shown in the column headers
    */
-  public manInfo(): { name: string; group: string }[] {
-    return this.shiftsData.map(s => ({ name: s.turnista, group: s.tipo_turnista }));
+  public manInfo(): ManInfo[] {
+    return this.shiftsData.map(s => new ManInfo(s.codice, s.nominativo, s.gruppi));
   }
 
   /**
    * Extracts shifts information from the shifts data
    * @returns an array as long as the interval between fromDate and toDate
    */
-  public getShiftsInfo(manName: string): { text: string; tooltip: string; dayInfo: DayInfo }[] {
+  public getShiftsInfo(codice: string): { text: string; tooltip: string; dayInfo: DayInfo }[] {
     const result: { text: string; tooltip: string; dayInfo: DayInfo }[] = [];
     const manShifts = this.shiftsData
-      .find(s => s.turnista === manName);
+      .find(s => s.codice === codice);
 
     if (!manShifts) {
       this.calendar().forEach(info => {
@@ -119,15 +120,15 @@ export class ShiftsComponent implements OnInit {
    * Returns the name of the man currently being edited
    */
   public get nowEditingMan(): string {
-    return this.editingMan;
+    return this.editingManCode;
   }
 
   /**
    * Enters the edit mode
    * @param man The man being edited
    */
-  public editMan(man: string): void {
-    this.editingMan = man;
+  public editMan(manCode: string): void {
+    this.editingManCode = manCode;
     this.pendingChanges = [];
   }
 
@@ -135,7 +136,7 @@ export class ShiftsComponent implements OnInit {
    * Save the changes to the man shifts and exits the edit mode
    */
   public saveChanges(): void {
-    this.editingMan = null;
+    this.editingManCode = null;
     console.log('now should save this changes', this.pendingChanges);
     this.pendingChanges = [];
   }
@@ -144,7 +145,7 @@ export class ShiftsComponent implements OnInit {
    * Cancel the changes to the man shifts and exits the edit mode
    */
   public cancelChanges(): void {
-    this.editingMan = null;
+    this.editingManCode = null;
     console.log('these changes are going to be canceled', this.pendingChanges);
     this.pendingChanges = [];
   }
@@ -155,8 +156,8 @@ export class ShiftsComponent implements OnInit {
    */
   public cssClassByGroup(c: string): string {
     switch (c) {
-      case 'Interno': return 'badge-success';
-      case 'Esterno': return 'badge-warning';
+      case 'Interni': return 'badge-success';
+      case 'Esterni': return 'badge-warning';
       default: return 'bg-secondary';
     }
   }
@@ -171,7 +172,7 @@ export class ShiftsComponent implements OnInit {
   public onShiftChanged(newValue) {
     let value = this.pendingChanges.find(c => c.day.valueOf() === newValue.day.valueOf());
     if (!value) {
-      value = { day: newValue.day, newShift: newValue.newShift };
+      value = { manCode: newValue.manCode, day: newValue.day, newShift: newValue.newShift };
       this.pendingChanges.push(value);
     } else {
       value.newShift = newValue.newShift;
@@ -198,8 +199,8 @@ export class ShiftsComponent implements OnInit {
    * write privileges on a certain shift.
    * @param manName The name of the man the shifts belong to
    */
-  public canEditShifts(manName: string): boolean {
-    return this.authorizationDeskService.canEditShifts(manName);
+  public canEditShifts(manCode: string): boolean {
+    return this.authorizationDeskService.canEditShifts(manCode);
   }
 }
 

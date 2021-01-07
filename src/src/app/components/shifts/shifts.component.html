@@ -11,15 +11,16 @@
     <tbody>
         <tr *ngFor="let info of manInfo(); trackBy:identifyManInfo">
             <th scope="row">
-                <span [ngClass]="cssClassByGroup(info.group)" class="badge m-1">{{ info.group }}</span>
+                <span *ngFor="let g of info.groups" [ngClass]="cssClassByGroup(g)" class="badge m-1">{{ g }}</span>
             </th>
             <th scope="row" class="man-name">
-                <span *ngIf="canEditShifts(info.name)">
+                <!-- editing controls - start -->
+                <span *ngIf="canEditShifts(info.codice)">
                     <button *ngIf="!nowEditingMan" type="button" class="btn btn-link btn-sm float-right p-0"
-                        (click)="editMan(info.name)">
+                        (click)="editMan(info.codice)">
                         <fa-icon class="" [icon]="faPen"></fa-icon>
                     </button>
-                    <span *ngIf="nowEditingMan == info.name">
+                    <span *ngIf="nowEditingMan == info.codice">
                         <button type="button" class="text-secondary btn btn-link btn-sm float-right p-0"
                             (click)="cancelChanges()">
                             <fa-icon class="fa-lg" [icon]="faTimes"></fa-icon>
@@ -30,17 +31,18 @@
                         </button>
                     </span>
                 </span>
+                <!-- editing controls - end -->
                 <div class="">
                     <fa-icon [icon]="faUser"></fa-icon>
                     {{ info.name }}
                 </div>
             </th>
-            <td *ngFor="let shiftInfo of getShiftsInfo(info.name); trackBy:identifyShiftInfo" class="text-center"
+            <td *ngFor="let shiftInfo of getShiftsInfo(info.codice); trackBy:identifyShiftInfo" class="text-center"
                 [ngClass]="{holyday: shiftInfo.dayInfo.holyday, today: shiftInfo.dayInfo.today, notCurMonth: !shiftInfo.dayInfo.curMonth}"
                 title="{{ shiftInfo.tooltip }}">
-                <span *ngIf="nowEditingMan != info.name">{{ shiftInfo.text }}</span>
-                <span *ngIf="nowEditingMan === info.name">
-                    <app-shift-editor [editHandler]="{ manName: info.name, day: shiftInfo.dayInfo.day }"
+                <span *ngIf="nowEditingMan != info.codice">{{ shiftInfo.text }}</span>
+                <span *ngIf="nowEditingMan === info.codice">
+                    <app-shift-editor [editHandler]="{ manCode: info.codice, day: shiftInfo.dayInfo.day }"
                         [curShift]="shiftInfo.text" [allShifts]="allShifts" (shiftChanged)="onShiftChanged($event)">
                     </app-shift-editor>
                 </span>

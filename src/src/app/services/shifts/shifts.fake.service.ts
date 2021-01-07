@@ -5,8 +5,10 @@ import { Presenze } from 'src/app/models/shifts/Presenze';
 
 const fakeData: ManShift[] = [
   new ManShift(
-    'Mario Rossi',
-    'Esterno',
+    'MAN001',
+    'Mario',
+    'Rossi',
+    ['Esterni'],
     [
       new Presenze(
         new Date(2021, 0, 1),
@@ -31,8 +33,10 @@ const fakeData: ManShift[] = [
       ),
     ]),
   new ManShift(
-    'Giuseppe Verdi',
-    'Esterno',
+    'MAN002',
+    'Giuseppe',
+    'Verdi',
+    ['Esterni', 'II liv.'],
     [
       new Presenze(
         new Date(2021, 0, 4),
@@ -57,8 +61,10 @@ const fakeData: ManShift[] = [
       ),
     ]),
   new ManShift(
-    'Antonio Bianchi',
-    'Interno',
+    'MAN003',
+    'Antonio',
+    'Bianchi',
+    ['Interni'],
     [
       new Presenze(
         new Date(2021, 0, 9),
@@ -107,6 +113,6 @@ export class ShiftsFakeService {
   constructor() { }
 
   public shifts$(fromDate: Date, toDate: Date, manGroups: string[]): Observable<ManShift[]> {
-    return of(fakeData.filter(ms => manGroups.length === 0 || !!manGroups.find(mg => mg === ms.tipo_turnista)));
+    return of(fakeData.filter(ms => manGroups.length === 0 || manGroups.some(mg => ms.gruppi.includes(mg))));
   }
 }
