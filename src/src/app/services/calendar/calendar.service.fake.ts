@@ -28,7 +28,7 @@ export class CalendarFakeService {
         const workingDay = ![0, 6].includes(weekDay);
         const weekNumber = this.getWeekNumber(d);
         const isItToday = d.valueOf() === (new Date()).valueOf();
-        return new Day(d, weekDayName, workingDay, weekNumber, isItToday);
+        return new Day(d, weekDayName, workingDay, '', weekNumber, isItToday);
       }));
   }
 

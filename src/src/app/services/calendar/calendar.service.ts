@@ -16,7 +16,8 @@ export class CalendarService {
      * The returned entities have the following attributes to be mapped:
      *  - data
      *  - giornoSettimana
-     *  - feriale
+     *  - fineSettimana
+     *  - festivo
      *  - numeroSettimana
      *  - oggi
      */
