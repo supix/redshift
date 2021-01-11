@@ -3,8 +3,8 @@
         <tr>
             <th scope="col"></th>
             <th scope="col"></th>
-            <th *ngFor="let dayInfo of calendar()" scope="col" class="text-center"
-                [ngClass]="{holyday: dayInfo.holyday, today: dayInfo.today, notCurMonth: !dayInfo.curMonth}">{{
+            <th *ngFor="let dayInfo of daysToShow" scope="col" class="text-center"
+                [ngClass]="{holyday: !dayInfo.workingDay, today: dayInfo.itIsToday, notCurMonth: !dayInfo.curMonth}">{{
                 dayInfo.day | dtos }}</th>
         </tr>
     </thead>

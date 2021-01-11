@@ -8,6 +8,7 @@ import { AuthorizationDeskService } from 'src/app/services/autorizationDesk/auth
 import { ManInfo } from './ManInfo';
 import { forkJoin, Observable } from 'rxjs';
 import { CalendarService } from 'src/app/services/calendar/calendar.service';
+import { Day } from 'src/app/models/day/day';
 
 @Component({
   selector: 'app-shifts',
@@ -26,6 +27,7 @@ export class ShiftsComponent implements OnInit {
   faPen = faPen;
   faCheckCircle = faCheckCircle;
   faTimes = faTimes;
+  daysToShow: DayInfo[];
 
   constructor(
     private readonly calendarService: CalendarService,
@@ -45,7 +47,13 @@ export class ShiftsComponent implements OnInit {
 
       forkJoin([shifts$, calendar$]).subscribe(result => {
         this.shiftsData = result[0];
-        // here the calendar observable must be handled
+        this.daysToShow = result[1].map<DayInfo>(d => 
+          new DayInfo(
+            d.date,
+            !d.workingDay,
+            d.itIsToday,
+            d.date.getMonth() === (new Date()).getMonth()
+        ));
       });
     });
   }
@@ -68,14 +76,14 @@ export class ShiftsComponent implements OnInit {
       .find(s => s.codice === codice);
 
     if (!manShifts) {
-      this.calendar().forEach(info => {
+      this.daysToShow.forEach(info => {
         result.push({ text: '', tooltip: '', dayInfo: info });
       });
 
       return result;
     }
 
-    this.calendar().forEach(info => {
+    this.daysToShow.forEach(info => {
       const dayShift = manShifts.presenze
         .find(d => d.data.valueOf() === info.day.valueOf());
       if (!dayShift) {
@@ -88,40 +96,12 @@ export class ShiftsComponent implements OnInit {
   }
 
   /**
-   * computes the initial dates, as the first and the last day of the current month
+   * computes the initial dates, as the first and the last day of the current month. Adds some preceeding and following days.
    */
   private initDates(): void {
     const curDate = new Date();
     this.fromDate = new Date(curDate.getFullYear(), curDate.getMonth(), -6);
     this.toDate = new Date(curDate.getFullYear(), curDate.getMonth() + 1, 6);
-  }
-
-  /**
-   * converts a date in a dat object
-   * @returns an objects carrying the holiday information as well
-   */
-  private dateToObj(day: Date): DayInfo {
-    const holyday = [0, 6].indexOf(day.getDay()) >= 0;
-    const today = new Date((new Date()).getTime());
-    today.setHours(0, 0, 0, 0);
-    return new DayInfo(day, holyday, day.valueOf() === today.valueOf(), day.getMonth() === today.getMonth());
-  }
-
-  /**
-   * Creates an array of days, as long as the interval between fromDate and toDate
-   * @returns the array
-   */
-  public calendar(): DayInfo[] {
-    const year = this.fromDate.getFullYear();
-    const month = this.fromDate.getMonth();
-    let day = this.fromDate.getDate();
-    const result: Date[] = [this.fromDate];
-
-    while (result[result.length - 1] < this.toDate) {
-      result.push(new Date(year, month, ++day));
-    }
-
-    return result.map(d => this.dateToObj(d));
   }
 
   /**
