@@ -42,8 +42,8 @@
                 title="{{ shiftInfo.tooltip }}">
                 <div *ngIf="nowEditingMan != info.codice">
                     <div>{{ shiftInfo.text }}</div>
-                    <fa-icon *ngIf="shiftInfo.offsite" class="text-unimportant" [icon]="faHouseUser" title="Offsite"></fa-icon>
-                    <fa-icon *ngIf="!shiftInfo.offsite" class="text-primary" [icon]="faUniversity" title="In sede"></fa-icon>
+                    <fa-icon *ngIf="!!shiftInfo.text && shiftInfo.offsite" class="text-unimportant" [icon]="faHouseUser" title="Offsite"></fa-icon>
+                    <fa-icon *ngIf="!!shiftInfo.text && !shiftInfo.offsite" class="text-primary" [icon]="faUniversity" title="In sede"></fa-icon>
                 </div>
                 <div *ngIf="nowEditingMan === info.codice">
                     <app-shift-editor [editHandler]="{ manCode: info.codice, day: shiftInfo.dayInfo.day }"
