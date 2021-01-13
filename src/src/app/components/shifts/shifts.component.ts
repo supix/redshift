@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faCheckCircle, faTimes, faPen, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faCheckCircle, faTimes, faPen, faUser, faHouseUser, faUniversity } from '@fortawesome/free-solid-svg-icons';
 import { ManShift } from 'src/app/models/shifts/ManShift';
 import { ShiftsService } from 'src/app/services/shifts/shifts.service';
 import { ActivatedRoute } from '@angular/router';
@@ -27,6 +27,8 @@ export class ShiftsComponent implements OnInit {
   faPen = faPen;
   faCheckCircle = faCheckCircle;
   faTimes = faTimes;
+  faHouseUser = faHouseUser;
+  faUniversity = faUniversity;
   daysToShow: DayInfo[];
 
   constructor(
@@ -70,14 +72,14 @@ export class ShiftsComponent implements OnInit {
    * Extracts shifts information from the shifts data
    * @returns an array as long as the interval between fromDate and toDate
    */
-  public getShiftsInfo(codice: string): { text: string; tooltip: string; dayInfo: DayInfo }[] {
-    const result: { text: string; tooltip: string; dayInfo: DayInfo }[] = [];
+  public getShiftsInfo(codice: string): { text: string; tooltip: string; offsite: boolean; dayInfo: DayInfo }[] {
+    const result: { text: string; tooltip: string; offsite: boolean; dayInfo: DayInfo }[] = [];
     const manShifts = this.shiftsData
       .find(s => s.codice === codice);
 
     if (!manShifts) {
       this.daysToShow.forEach(info => {
-        result.push({ text: '', tooltip: '', dayInfo: info });
+        result.push({ text: '', tooltip: '', offsite: false, dayInfo: info });
       });
 
       return result;
@@ -87,9 +89,9 @@ export class ShiftsComponent implements OnInit {
       const dayShift = manShifts.presenze
         .find(d => d.data.valueOf() === info.day.valueOf());
       if (!dayShift) {
-        result.push({ text: '', tooltip: '', dayInfo: info });
+        result.push({ text: '', tooltip: '', offsite: false, dayInfo: info });
       } else {
-        result.push({ text: dayShift.turno_abbr, tooltip: dayShift.turno, dayInfo: info });
+        result.push({ text: dayShift.turno_abbr, tooltip: dayShift.turno, offsite: dayShift.offsite === 1, dayInfo: info });
       }
     });
     return result;

@@ -32,3 +32,7 @@
 .shifts-table .holyday {
     background: repeating-linear-gradient( 40deg, transparent, transparent 10px, #fff 10px, #eee 20px)
 }
+
+.shifts-table .text-unimportant {
+    color: silver;
+}

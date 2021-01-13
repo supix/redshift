@@ -14,21 +14,21 @@ const fakeData: ManShift[] = [
         new Date(2021, 0, 1),
         'F',
         'Ferie',
-        null,
+        0,
         'http://url-turno.test.net'
       ),
       new Presenze(
         new Date(2021, 0, 2),
         'F',
         'Ferie',
-        null,
+        1,
         'http://url-turno.test.net'
       ),
       new Presenze(
         new Date(2021, 0, 3),
         'F',
         'Ferie',
-        null,
+        1,
         'http://url-turno.test.net'
       ),
     ]),
@@ -42,21 +42,21 @@ const fakeData: ManShift[] = [
         new Date(2021, 0, 4),
         'F',
         'Ferie',
-        null,
+        0,
         'http://url-turno.test.net'
       ),
       new Presenze(
         new Date(2021, 0, 5),
         'C',
         'Centrale',
-        null,
+        0,
         'http://url-turno.test.net'
       ),
       new Presenze(
         new Date(2021, 0, 7),
         'N',
         'Notte',
-        null,
+        0,
         'http://url-turno.test.net'
       ),
     ]),
@@ -70,35 +70,35 @@ const fakeData: ManShift[] = [
         new Date(2021, 0, 9),
         'G',
         'Giornata piena',
-        null,
+        1,
         'http://url-turno.test.net'
       ),
       new Presenze(
         new Date(2021, 0, 10),
         'G',
         'Giornata piena',
-        null,
+        1,
         'http://url-turno.test.net'
       ),
       new Presenze(
         new Date(2021, 0, 11),
         'K',
         'Kubernetes',
-        null,
+        1,
         'http://url-turno.test.net'
       ),
       new Presenze(
         new Date(2021, 0, 15),
         'K',
         'Kubernetes',
-        null,
+        1,
         'http://url-turno.test.net'
       ),
       new Presenze(
         new Date(2021, 0, 16),
         'K',
         'Kubernetes',
-        null,
+        1,
         'http://url-turno.test.net'
       ),
     ]),
