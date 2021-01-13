@@ -4,7 +4,7 @@
             <th scope="col"></th>
             <th scope="col"></th>
             <th *ngFor="let dayInfo of daysToShow" scope="col" class="text-center"
-                [ngClass]="{holyday: !dayInfo.workingDay, today: dayInfo.itIsToday, notCurMonth: !dayInfo.curMonth}">{{
+                [ngClass]="{holyday: dayInfo.holyday, today: dayInfo.today, notCurMonth: !dayInfo.curMonth}">{{
                 dayInfo.day | dtos }}</th>
         </tr>
     </thead>

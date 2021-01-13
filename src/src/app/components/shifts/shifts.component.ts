@@ -49,7 +49,7 @@ export class ShiftsComponent implements OnInit {
 
       forkJoin([shifts$, calendar$]).subscribe(result => {
         this.shiftsData = result[0];
-        this.daysToShow = result[1].map<DayInfo>(d => 
+        this.daysToShow = result[1].map<DayInfo>(d =>
           new DayInfo(
             d.date,
             !d.workingDay,
