@@ -23,7 +23,7 @@
     font-weight: bold;
     background-color:rgb(252, 244, 230);
     color: rgb(105, 68, 0);
-    filter: drop-shadow(.5ex .5ex .5ex rgb(139, 131, 116));
+    filter: drop-shadow(.3ex .3ex .3ex rgb(139, 131, 116));
 }
 
 .shifts-table th.notCurMonth {
