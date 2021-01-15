@@ -15,6 +15,7 @@ import { AuthorizationDeskService } from './services/autorizationDesk/authorizat
 import { AuthorizationDeskFakeService } from './services/autorizationDesk/authorization-desk-service.fake.service';
 import { CalendarService } from './services/calendar/calendar.service';
 import { CalendarFakeService } from './services/calendar/calendar.service.fake';
+import { TextEllipsisPipe } from './pipes/text-ellipsis/text-ellipsis.pipe';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { CalendarFakeService } from './services/calendar/calendar.service.fake';
     ShiftsComponent,
     NavbarComponent,
     DtosPipe,
-    ShiftEditorComponent
+    ShiftEditorComponent,
+    TextEllipsisPipe
   ],
   imports: [
     RouterModule.forRoot([]),

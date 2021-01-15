@@ -35,10 +35,10 @@
                 <div class="">
                     <div>
                         <fa-icon [icon]="faUser"></fa-icon>
-                        {{ info.name }}
+                        {{ info.name | elps: 12 }}
                     </div>
                     <div class="surname">
-                        {{ info.surname }}
+                        {{ info.surname | elps: 12 }}
                     </div>
                 </div>
             </th>
