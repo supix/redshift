@@ -33,8 +33,13 @@
                 </span>
                 <!-- editing controls - end -->
                 <div class="">
-                    <fa-icon [icon]="faUser"></fa-icon>
-                    {{ info.name }}
+                    <div>
+                        <fa-icon [icon]="faUser"></fa-icon>
+                        {{ info.name }}
+                    </div>
+                    <div class="surname">
+                        {{ info.surname }}
+                    </div>
                 </div>
             </th>
             <td *ngFor="let shiftInfo of getShiftsInfo(info.codice); trackBy:identifyShiftInfo" class="text-center"
@@ -42,8 +47,10 @@
                 title="{{ shiftInfo.tooltip }}">
                 <div *ngIf="nowEditingMan != info.codice">
                     <div>{{ shiftInfo.text }}</div>
-                    <fa-icon *ngIf="!!shiftInfo.text && shiftInfo.offsite" class="text-unimportant" [icon]="faHouseUser" title="Offsite"></fa-icon>
-                    <fa-icon *ngIf="!!shiftInfo.text && !shiftInfo.offsite" class="text-primary" [icon]="faUniversity" title="In sede"></fa-icon>
+                    <fa-icon *ngIf="!!shiftInfo.text && shiftInfo.offsite" class="text-unimportant" [icon]="faHouseUser"
+                        title="Offsite"></fa-icon>
+                    <fa-icon *ngIf="!!shiftInfo.text && !shiftInfo.offsite" class="text-primary" [icon]="faUniversity"
+                        title="In sede"></fa-icon>
                 </div>
                 <div *ngIf="nowEditingMan === info.codice">
                     <app-shift-editor [editHandler]="{ manCode: info.codice, day: shiftInfo.dayInfo.day }"

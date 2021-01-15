@@ -65,7 +65,7 @@ export class ShiftsComponent implements OnInit {
    * @returns an array of objects with the man information, to be shown in the column headers
    */
   public manInfo(): ManInfo[] {
-    return this.shiftsData.map(s => new ManInfo(s.codice, s.nominativo, s.gruppi));
+    return this.shiftsData.map(s => new ManInfo(s.codice, s.nome, s.cognome, s.gruppi));
   }
 
   /**

@@ -62,8 +62,8 @@ const fakeData: ManShift[] = [
     ]),
   new ManShift(
     'MAN003',
-    'Antonio',
-    'Bianchi',
+    'Antonio Michele Maria',
+    'Perelli Boffa',
     ['Interni'],
     [
       new Presenze(

@@ -8,7 +8,7 @@
 }
 
 .shifts-table th.man-name {
-    min-width: 30ex;
+    min-width: 18ex;
 }
 
 .shifts-table th.holyday {
@@ -40,4 +40,9 @@
 
 .shifts-table .text-unimportant {
     color: silver;
+}
+
+.shifts-table .surname {
+    font-size: 130%;
+    font-weight: bold;
 }
