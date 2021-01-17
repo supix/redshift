@@ -4,7 +4,7 @@ import { DayInfo } from '../shifts/DayInfo';
 import { ShiftCounts } from './ShiftCounts';
 
 @Component({
-  selector: 'app-shift-daily-resume',
+  selector: '[app-shift-daily-resume]',
   templateUrl: './shift-daily-resume.component.html',
   styleUrls: ['./shift-daily-resume.component.css']
 })

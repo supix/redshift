@@ -1,0 +1,48 @@
+.shifts-table {
+    color: rgb(85, 85, 85);
+}
+
+th {
+    font-size: small;
+    font-weight: normal;
+}
+
+th.man-name {
+    min-width: 18ex;
+}
+
+th.holyday {
+    background: #eee;
+}
+
+th.today {
+    background-color: rgb(248, 230, 196);
+}
+
+.today {
+    font-weight: bold;
+    background-color:rgb(252, 244, 230);
+    color: rgb(105, 68, 0);
+    filter: drop-shadow(.3ex .3ex .3ex rgb(139, 131, 116));
+}
+
+th.notCurMonth {
+    background-color: #eee;
+}
+
+.notCurMonth {
+    filter: blur(1px) brightness(105%);
+}
+
+.holyday {
+    background: repeating-linear-gradient( 40deg, transparent, transparent 10px, #fff 10px, #eee 20px)
+}
+
+.text-unimportant {
+    color: silver;
+}
+
+.surname {
+    font-size: 130%;
+    font-weight: bold;
+}

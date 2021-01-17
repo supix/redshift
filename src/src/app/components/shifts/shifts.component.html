@@ -1,63 +1,57 @@
-<table class="table table-striped table-bordered table-sm shifts-table">
-    <thead>
-        <tr>
-            <th scope="col"></th>
-            <th scope="col"></th>
-            <th *ngFor="let dayInfo of daysToShow" scope="col" class="text-center"
-                [ngClass]="{holyday: dayInfo.holyday, today: dayInfo.today, notCurMonth: !dayInfo.curMonth}">{{
-                dayInfo.day | dtos }}</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let info of manInfo(); trackBy:identifyManInfo">
-            <th scope="row">
-                <span *ngFor="let g of info.groups" [ngClass]="cssClassByGroup(g)" class="badge m-1">{{ g }}</span>
-            </th>
-            <th scope="row" class="man-name">
-                <!-- editing controls - start -->
-                <span *ngIf="canEditShifts(info.codice)">
-                    <button *ngIf="!nowEditingMan" type="button" class="btn btn-link btn-sm float-right p-0"
-                        (click)="editMan(info.codice)">
-                        <fa-icon class="" [icon]="faPen"></fa-icon>
-                    </button>
-                    <span *ngIf="nowEditingMan == info.codice">
-                        <button type="button" class="text-secondary btn btn-link btn-sm float-right p-0"
-                            (click)="cancelChanges()">
-                            <fa-icon class="fa-lg" [icon]="faTimes"></fa-icon>
-                        </button>
-                        <button type="button" class="text-success btn btn-link btn-sm float-right p-0 mr-1"
-                            (click)="saveChanges()">
-                            <fa-icon class="fa-lg" [icon]="faCheckCircle"></fa-icon>
-                        </button>
-                    </span>
-                </span>
-                <!-- editing controls - end -->
-                <div class="">
-                    <div>
-                        <fa-icon [icon]="faUser"></fa-icon>
-                        {{ info.name | elps: 12 }}
-                    </div>
-                    <div class="surname">
-                        {{ info.surname | elps: 12 }}
-                    </div>
-                </div>
-            </th>
-            <td *ngFor="let shiftInfo of getShiftsInfo(info.codice); trackBy:identifyShiftInfo" class="text-center"
-                [ngClass]="{holyday: shiftInfo.dayInfo.holyday, today: shiftInfo.dayInfo.today, notCurMonth: !shiftInfo.dayInfo.curMonth}"
-                title="{{ shiftInfo.tooltip }}">
-                <div *ngIf="nowEditingMan != info.codice">
-                    <div>{{ shiftInfo.text }}</div>
-                    <fa-icon *ngIf="!!shiftInfo.text && shiftInfo.offsite" class="text-unimportant" [icon]="faHouseUser"
-                        title="Offsite"></fa-icon>
-                    <fa-icon *ngIf="!!shiftInfo.text && !shiftInfo.offsite" class="text-primary" [icon]="faUniversity"
-                        title="In sede"></fa-icon>
-                </div>
-                <div *ngIf="nowEditingMan === info.codice">
-                    <app-shift-editor [editHandler]="{ manCode: info.codice, day: shiftInfo.dayInfo.day }"
-                        [curShift]="shiftInfo.text" [allShifts]="allShifts" (shiftChanged)="onShiftChanged($event)">
-                    </app-shift-editor>
-                </div>
-            </td>
-        </tr>
-    </tbody>
-</table>
+<tr>
+    <th scope="col"></th>
+    <th scope="col"></th>
+    <th *ngFor="let dayInfo of daysToShow" scope="col" class="text-center"
+        [ngClass]="{holyday: dayInfo.holyday, today: dayInfo.today, notCurMonth: !dayInfo.curMonth}">{{
+        dayInfo.day | dtos }}</th>
+</tr>
+<tr *ngFor="let info of manInfo(); trackBy:identifyManInfo">
+    <th scope="row">
+        <span *ngFor="let g of info.groups" [ngClass]="cssClassByGroup(g)" class="badge m-1">{{ g }}</span>
+    </th>
+    <th scope="row" class="man-name">
+        <!-- editing controls - start -->
+        <span *ngIf="canEditShifts(info.codice)">
+            <button *ngIf="!nowEditingMan" type="button" class="btn btn-link btn-sm float-right p-0"
+                (click)="editMan(info.codice)">
+                <fa-icon class="" [icon]="faPen"></fa-icon>
+            </button>
+            <span *ngIf="nowEditingMan == info.codice">
+                <button type="button" class="text-secondary btn btn-link btn-sm float-right p-0"
+                    (click)="cancelChanges()">
+                    <fa-icon class="fa-lg" [icon]="faTimes"></fa-icon>
+                </button>
+                <button type="button" class="text-success btn btn-link btn-sm float-right p-0 mr-1"
+                    (click)="saveChanges()">
+                    <fa-icon class="fa-lg" [icon]="faCheckCircle"></fa-icon>
+                </button>
+            </span>
+        </span>
+        <!-- editing controls - end -->
+        <div class="">
+            <div>
+                <fa-icon [icon]="faUser"></fa-icon>
+                {{ info.name | elps: 12 }}
+            </div>
+            <div class="surname">
+                {{ info.surname | elps: 12 }}
+            </div>
+        </div>
+    </th>
+    <td *ngFor="let shiftInfo of getShiftsInfo(info.codice); trackBy:identifyShiftInfo" class="text-center"
+        [ngClass]="{holyday: shiftInfo.dayInfo.holyday, today: shiftInfo.dayInfo.today, notCurMonth: !shiftInfo.dayInfo.curMonth}"
+        title="{{ shiftInfo.tooltip }}">
+        <div *ngIf="nowEditingMan != info.codice">
+            <div>{{ shiftInfo.text }}</div>
+            <fa-icon *ngIf="!!shiftInfo.text && shiftInfo.offsite" class="text-unimportant" [icon]="faHouseUser"
+                title="Offsite"></fa-icon>
+            <fa-icon *ngIf="!!shiftInfo.text && !shiftInfo.offsite" class="text-primary" [icon]="faUniversity"
+                title="In sede"></fa-icon>
+        </div>
+        <div *ngIf="nowEditingMan === info.codice">
+            <app-shift-editor [editHandler]="{ manCode: info.codice, day: shiftInfo.dayInfo.day }"
+                [curShift]="shiftInfo.text" [allShifts]="allShifts" (shiftChanged)="onShiftChanged($event)">
+            </app-shift-editor>
+        </div>
+    </td>
+</tr>

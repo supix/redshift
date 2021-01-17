@@ -8,9 +8,9 @@ import { ShiftsDataService } from 'src/app/services/shifts-data/shifts-data.serv
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-shifts',
+  selector: '[app-shifts]',
   templateUrl: './shifts.component.html',
-  styleUrls: ['./shifts.component.css']
+  styleUrls: ['../shifts-container/shifts-container.component.css', './shifts.component.css']
 })
 export class ShiftsComponent implements OnInit {
   public readonly allShifts = ['C', 'M', 'P', 'N', 'D', 'F'];
