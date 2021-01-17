@@ -1,1 +1,7 @@
-<p>shift-daily-resume works!</p>
+<table class="table table-striped table-bordered table-sm">
+    <tr>
+        <td *ngFor="let d of daysToShow">
+            <div *ngFor="let s of getCounts(d)" class="badge badge-info">{{ s.code }}: {{ s.count }}</div>
+        </td>
+    </tr>
+</table>
