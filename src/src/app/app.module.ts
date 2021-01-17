@@ -18,6 +18,7 @@ import { CalendarFakeService } from './services/calendar/calendar.service.fake';
 import { TextEllipsisPipe } from './pipes/text-ellipsis/text-ellipsis.pipe';
 import { ShiftsContainerComponent } from './components/shifts-container/shifts-container.component';
 import { ShiftDailyResumeComponent } from './components/shift-daily-resume/shift-daily-resume.component';
+import { ShiftsDataService } from './services/shifts-data/shifts-data.service';
 
 @NgModule({
   declarations: [
@@ -36,10 +37,11 @@ import { ShiftDailyResumeComponent } from './components/shift-daily-resume/shift
     FontAwesomeModule,
     NgbModule
   ],
-  providers: [ 
+  providers: [
     { provide: CalendarService, useClass: CalendarFakeService },
     { provide: ShiftsService, useClass: ShiftsFakeService },
-    { provide: AuthorizationDeskService, useClass: AuthorizationDeskFakeService }
+    { provide: AuthorizationDeskService, useClass: AuthorizationDeskFakeService },
+    ShiftsDataService,
   ],
   bootstrap: [AppComponent]
 })

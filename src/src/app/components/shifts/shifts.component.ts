@@ -1,14 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { faCheckCircle, faTimes, faPen, faUser, faHouseUser, faUniversity } from '@fortawesome/free-solid-svg-icons';
 import { ManShift } from 'src/app/models/shifts/ManShift';
-import { ShiftsService } from 'src/app/services/shifts/shifts.service';
-import { ActivatedRoute } from '@angular/router';
 import { DayInfo } from './DayInfo';
 import { AuthorizationDeskService } from 'src/app/services/autorizationDesk/authorization-desk.service';
 import { ManInfo } from './ManInfo';
-import { forkJoin, Observable } from 'rxjs';
-import { CalendarService } from 'src/app/services/calendar/calendar.service';
-import { Day } from 'src/app/models/day/day';
+import { ShiftsDataService } from 'src/app/services/shifts-data/shifts-data.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-shifts',
@@ -17,9 +14,6 @@ import { Day } from 'src/app/models/day/day';
 })
 export class ShiftsComponent implements OnInit {
   public readonly allShifts = ['C', 'M', 'P', 'N', 'D', 'F'];
-  private fromDate: Date;
-  private toDate: Date;
-  private shiftsData: ManShift[];
   private groups: string[];
   private editingManCode: string = null;
   private pendingChanges: { manCode: string; day: Date; newShift: string }[] = [];
@@ -29,13 +23,12 @@ export class ShiftsComponent implements OnInit {
   faTimes = faTimes;
   faHouseUser = faHouseUser;
   faUniversity = faUniversity;
-  daysToShow: DayInfo[];
 
   constructor(
-    private readonly calendarService: CalendarService,
-    private readonly shiftsService: ShiftsService,
+    private readonly shiftsDataService: ShiftsDataService,
     private readonly authorizationDeskService: AuthorizationDeskService,
-    private readonly route: ActivatedRoute) {
+    private readonly route: ActivatedRoute
+  ) {
   }
 
   ngOnInit(): void {
@@ -43,20 +36,6 @@ export class ShiftsComponent implements OnInit {
       this.groups = !!params.group ?
         Array.isArray(params.group) ? params.group : [params.group]
         : [];
-      this.initDates();
-      const shifts$ = this.shiftsService.shifts$(this.fromDate, this.toDate, this.groups);
-      const calendar$ = this.calendarService.calendar$(this.fromDate, this.toDate);
-
-      forkJoin([shifts$, calendar$]).subscribe(result => {
-        this.shiftsData = result[0];
-        this.daysToShow = result[1].map<DayInfo>(d =>
-          new DayInfo(
-            d.date,
-            !d.workingDay,
-            d.itIsToday,
-            d.date.getMonth() === (new Date()).getMonth()
-        ));
-      });
     });
   }
 
@@ -98,12 +77,17 @@ export class ShiftsComponent implements OnInit {
   }
 
   /**
-   * computes the initial dates, as the first and the last day of the current month. Adds some preceeding and following days.
+   * wrapper for the DOM
    */
-  private initDates(): void {
-    const curDate = new Date();
-    this.fromDate = new Date(curDate.getFullYear(), curDate.getMonth(), -6);
-    this.toDate = new Date(curDate.getFullYear(), curDate.getMonth() + 1, 6);
+  public get shiftsData(): ManShift[] {
+    return this.shiftsDataService.shiftsData;
+  }
+
+  /**
+   * wrapper for the DOM
+   */
+  public get daysToShow(): DayInfo[] {
+    return this.shiftsDataService.daysToShow;
   }
 
   /**
@@ -159,7 +143,7 @@ export class ShiftsComponent implements OnInit {
    * request.
    * @param newValue information about the new value
    */
-  public onShiftChanged(newValue) {
+  public onShiftChanged(newValue): void {
     let value = this.pendingChanges.find(c => c.day.valueOf() === newValue.day.valueOf());
     if (!value) {
       value = { manCode: newValue.manCode, day: newValue.day, newShift: newValue.newShift };
