@@ -11,7 +11,6 @@ export class TextEllipsisPipe implements PipeTransform {
    * @param maxLen max allowed string length (should be greater than 3)
    */
   transform(text: string, maxLen: number): string {
-    console.log(text, maxLen);
     if (text.length <= maxLen) {
       return text;
     }
