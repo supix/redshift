@@ -7,7 +7,7 @@ import { ShiftCounts } from './ShiftCounts';
 @Component({
   selector: '[app-shift-daily-resume]',
   templateUrl: './shift-daily-resume.component.html',
-  styleUrls: ['./shift-daily-resume.component.css']
+  styleUrls: ['../shifts-container/shifts-container.component.css', './shift-daily-resume.component.css']
 })
 export class ShiftDailyResumeComponent implements OnInit {
   daysToShow: DayInfo[];
