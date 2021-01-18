@@ -2,6 +2,9 @@
     <th scope="row"></th>
     <th scope="row"></th>
     <td *ngFor="let d of daysToShow">
-        <div *ngFor="let s of getCounts(d)" class="badge badge-info">{{ s.code }}: {{ s.count }}</div>
+        <div *ngFor="let s of getCounts(d)" class="resume text-unimportant">
+            <span class="float-right">{{ s.count }}</span>
+            <span class="">{{ s.code }}:</span>
+        </div>
     </td>
 </tr>
