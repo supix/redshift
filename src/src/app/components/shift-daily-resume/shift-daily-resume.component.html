@@ -1,10 +1,23 @@
-<tr>
+<tr class="resume text-unimportant">
+    <th scope="row"></th>
+    <th scope="row"></th>
+    <td *ngFor="let d of daysToShow" class="text-center">
+        <div *ngFor="let s of getShiftsCount(d)">
+            <span class="">{{ s.count }}{{ s.code }}</span>
+        </div>
+    </td>
+</tr>
+<tr class="resume">
     <th scope="row"></th>
     <th scope="row"></th>
     <td *ngFor="let d of daysToShow">
-        <div *ngFor="let s of getCounts(d)" class="resume text-unimportant">
-            <span class="float-right">{{ s.count }}</span>
-            <span class="">{{ s.code }}:</span>
+        <div>
+            <span class="float-right">{{ getOffsetCount(d)[0] }}</span>
+            <fa-icon [icon]="faUniversity"></fa-icon>
+        </div>
+        <div>
+            <span class="float-right">{{ getOffsetCount(d)[1] }}</span>
+            <fa-icon [icon]="faHouseUser"></fa-icon>
         </div>
     </td>
 </tr>

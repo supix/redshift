@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { faHouseUser, faUniversity } from '@fortawesome/free-solid-svg-icons';
 import { ShiftsDataService } from 'src/app/services/shifts-data/shifts-data.service';
 import { DayInfo } from '../shifts/DayInfo';
 import { ShiftCounts } from './ShiftCounts';
@@ -10,6 +11,8 @@ import { ShiftCounts } from './ShiftCounts';
 })
 export class ShiftDailyResumeComponent implements OnInit {
   daysToShow: DayInfo[];
+  faHouseUser = faHouseUser;
+  faUniversity = faUniversity;
 
   constructor(
     private readonly shiftsDataService: ShiftsDataService
@@ -23,11 +26,15 @@ export class ShiftDailyResumeComponent implements OnInit {
     this.daysToShow = this.shiftsDataService.daysToShow;
   }
 
-  public getCounts(d: Date): ShiftCounts[] {
+  public getShiftsCount(d: Date): ShiftCounts[] {
     return [
       new ShiftCounts('M', 'Mattina', 5),
       new ShiftCounts('P', 'Pomeriggio', 4),
       new ShiftCounts('N', 'Notte', 2),
     ]
+  }
+
+  public getOffsetCount(d: Date): number[] {
+    return [2, 5];
   }
 }
