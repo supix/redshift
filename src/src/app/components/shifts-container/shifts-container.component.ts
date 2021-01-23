@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-shifts-container',
@@ -6,10 +7,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./shifts-container.component.css']
 })
 export class ShiftsContainerComponent implements OnInit {
+  private groups: string[];
 
-  constructor() { }
+  constructor(private readonly route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      this.groups = !!params.group ?
+        Array.isArray(params.group) ? params.group : [params.group]
+        : [];
+    });
   }
 
 }

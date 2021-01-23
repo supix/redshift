@@ -1,11 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { faCheckCircle, faTimes, faPen, faUser, faHouseUser, faUniversity } from '@fortawesome/free-solid-svg-icons';
 import { ManShift } from 'src/app/models/shifts/ManShift';
 import { DayInfo } from './DayInfo';
 import { AuthorizationDeskService } from 'src/app/services/autorizationDesk/authorization-desk.service';
 import { ManInfo } from './ManInfo';
 import { ShiftsDataService } from 'src/app/services/shifts-data/shifts-data.service';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: '[app-shifts]',
@@ -13,8 +12,9 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['../shifts-container/shifts-container.component.css', './shifts.component.css']
 })
 export class ShiftsComponent implements OnInit {
+  @Input() groups: string[];
+
   public readonly allShifts = ['C', 'M', 'P', 'N', 'D', 'F'];
-  private groups: string[];
   private editingManCode: string = null;
   private pendingChanges: { manCode: string; day: Date; newShift: string }[] = [];
   faUser = faUser;
@@ -27,16 +27,10 @@ export class ShiftsComponent implements OnInit {
   constructor(
     private readonly shiftsDataService: ShiftsDataService,
     private readonly authorizationDeskService: AuthorizationDeskService,
-    private readonly route: ActivatedRoute
   ) {
   }
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      this.groups = !!params.group ?
-        Array.isArray(params.group) ? params.group : [params.group]
-        : [];
-    });
   }
 
   /**
@@ -80,7 +74,7 @@ export class ShiftsComponent implements OnInit {
    * wrapper for the DOM
    */
   public get shiftsData(): ManShift[] {
-    return this.shiftsDataService.shiftsData;
+    return this.shiftsDataService.shiftsData(this.groups);
   }
 
   /**

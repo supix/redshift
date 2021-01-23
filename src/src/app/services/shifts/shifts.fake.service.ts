@@ -33,6 +33,34 @@ const fakeData: ManShift[] = [
       ),
     ]),
   new ManShift(
+    'MAN010',
+    'Riccardo',
+    'Giallini',
+    ['Interni'],
+    [...Array(28).keys()].map(i =>
+      new Presenze(
+        new Date(2021, 0, i + 1),
+        'M',
+        'Mattina',
+        0,
+        'http://url-turno.test.net'
+      ))
+  ),
+  new ManShift(
+    'MAN011',
+    'Michele',
+    'Neri',
+    ['Interni'],
+    [...Array(28).keys()].map(i =>
+      new Presenze(
+        new Date(2021, 0, i + 2),
+        'P',
+        'Pomeriggio',
+        1,
+        'http://url-turno.test.net'
+      ))
+  ),
+  new ManShift(
     'MAN002',
     'Giuseppe',
     'Verdi',

@@ -52,7 +52,8 @@ export class ShiftsDataService {
   /**
    * Getter for the shiftsData
    */
-  public get shiftsData(): ManShift[] {
-    return this.theShiftsData;
+  public shiftsData(groups: string[]): ManShift[] {
+    return this.theShiftsData
+      .filter(s => groups.some(g => s.gruppi.includes(g)));
   }
 }
