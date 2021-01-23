@@ -62,8 +62,8 @@ const fakeData: ManShift[] = [
   ),
   new ManShift(
     'MAN012',
-    'Michele',
-    'Neri',
+    'Giovanni',
+    'Rossi',
     ['Interni'],
     [...Array(28).keys()].map(i =>
       new Presenze(
