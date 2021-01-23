@@ -7,7 +7,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./shifts-container.component.css']
 })
 export class ShiftsContainerComponent implements OnInit {
-  private groups: string[];
+  groups: string[];
 
   constructor(private readonly route: ActivatedRoute) { }
 

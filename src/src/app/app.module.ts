@@ -19,6 +19,9 @@ import { TextEllipsisPipe } from './pipes/text-ellipsis/text-ellipsis.pipe';
 import { ShiftsContainerComponent } from './components/shifts-container/shifts-container.component';
 import { ShiftDailyResumeComponent } from './components/shift-daily-resume/shift-daily-resume.component';
 import { ShiftsDataService } from './services/shifts-data/shifts-data.service';
+import { routes } from './routes';
+
+const theRoutes = routes;
 
 @NgModule({
   declarations: [
@@ -32,7 +35,7 @@ import { ShiftsDataService } from './services/shifts-data/shifts-data.service';
     ShiftDailyResumeComponent
   ],
   imports: [
-    RouterModule.forRoot([]),
+    RouterModule.forRoot(theRoutes),
     BrowserModule,
     FontAwesomeModule,
     NgbModule
