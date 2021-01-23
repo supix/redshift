@@ -1,9 +1,9 @@
 import { Routes } from '@angular/router';
-import { ShiftsComponent } from './components/shifts/shifts.component';
+import { ShiftsContainerComponent } from './components/shifts-container/shifts-container.component';
 
 export const routes: Routes = [
-    { path: 'shifts', component: ShiftsComponent },
+    { path: 'shifts', component: ShiftsContainerComponent },
     // { path: 'calendar', component: ShiftsComponent },
-    { path: '',   redirectTo: '/shifts?group=Interni', pathMatch: 'full' }
-    // { path: '**', component: PageNotFoundComponent }
+    { path: '', redirectTo: '/shifts?group=Interni', pathMatch: 'full' },
+    { path: '**', redirectTo: '/shifts?group=Interni', pathMatch: 'full' }
 ]

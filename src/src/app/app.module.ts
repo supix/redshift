@@ -8,7 +8,6 @@ import { ShiftsComponent } from './components/shifts/shifts.component';
 import { ShiftsService } from './services/shifts/shifts.service';
 import { ShiftsFakeService } from './services/shifts/shifts.fake.service';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { RouterModule } from '@angular/router';
 import { DtosPipe } from './pipes/dtos/dtos.pipe';
 import { ShiftEditorComponent } from './components/shift-editor/shift-editor.component';
 import { AuthorizationDeskService } from './services/autorizationDesk/authorization-desk.service';
@@ -19,9 +18,7 @@ import { TextEllipsisPipe } from './pipes/text-ellipsis/text-ellipsis.pipe';
 import { ShiftsContainerComponent } from './components/shifts-container/shifts-container.component';
 import { ShiftDailyResumeComponent } from './components/shift-daily-resume/shift-daily-resume.component';
 import { ShiftsDataService } from './services/shifts-data/shifts-data.service';
-import { routes } from './routes';
-
-const theRoutes = routes;
+import { AppRoutingModule } from './app.routing.module';
 
 @NgModule({
   declarations: [
@@ -35,8 +32,8 @@ const theRoutes = routes;
     ShiftDailyResumeComponent
   ],
   imports: [
-    RouterModule.forRoot(theRoutes),
     BrowserModule,
+    AppRoutingModule,
     FontAwesomeModule,
     NgbModule
   ],
