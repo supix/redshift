@@ -19,6 +19,7 @@ import { ShiftsContainerComponent } from './components/shifts-container/shifts-c
 import { ShiftDailyResumeComponent } from './components/shift-daily-resume/shift-daily-resume.component';
 import { ShiftsDataService } from './services/shifts-data/shifts-data.service';
 import { AppRoutingModule } from './app.routing.module';
+import { DayReportComponent } from './components/day-report/day-report.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { AppRoutingModule } from './app.routing.module';
     ShiftEditorComponent,
     TextEllipsisPipe,
     ShiftsContainerComponent,
-    ShiftDailyResumeComponent
+    ShiftDailyResumeComponent,
+    DayReportComponent
   ],
   imports: [
     BrowserModule,
