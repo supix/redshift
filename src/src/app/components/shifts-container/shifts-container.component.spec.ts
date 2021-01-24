@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterModule } from '@angular/router';
 
 import { ShiftsContainerComponent } from './shifts-container.component';
 
@@ -8,6 +9,7 @@ describe('ShiftsContainerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [RouterModule.forRoot([])],
       declarations: [ ShiftsContainerComponent ]
     })
     .compileComponents();

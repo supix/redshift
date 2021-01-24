@@ -16,12 +16,12 @@ describe('ShiftsFakeService', () => {
 
   it('retrieves all the men with no group', () => {
     service.shifts$(new Date(2021, 0, 1), new Date(2021, 0, 28), [])
-      .subscribe(result => expect(result.length).toBe(3));
+      .subscribe(result => expect(result.length).toBe(6));
   });
 
   it('retrieves one man with group Interni', () => {
     service.shifts$(new Date(2021, 0, 1), new Date(2021, 0, 28), ['Interni'])
-      .subscribe(result => expect(result.length).toBe(1));
+      .subscribe(result => expect(result.length).toBe(4));
   });
 
   it('retrieves two men with group Esterni', () => {

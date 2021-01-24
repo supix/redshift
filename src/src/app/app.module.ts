@@ -11,7 +11,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { DtosPipe } from './pipes/dtos/dtos.pipe';
 import { ShiftEditorComponent } from './components/shift-editor/shift-editor.component';
 import { AuthorizationDeskService } from './services/autorizationDesk/authorization-desk.service';
-import { AuthorizationDeskFakeService } from './services/autorizationDesk/authorization-desk-service.fake.service';
+import { AuthorizationDeskFakeService } from './services/autorizationDesk/authorization-desk.fake.service';
 import { CalendarService } from './services/calendar/calendar.service';
 import { CalendarFakeService } from './services/calendar/calendar.service.fake';
 import { TextEllipsisPipe } from './pipes/text-ellipsis/text-ellipsis.pipe';
