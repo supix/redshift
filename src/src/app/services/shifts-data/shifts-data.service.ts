@@ -18,6 +18,16 @@ export class ShiftsDataService {
     private readonly calendarService: CalendarService,
     private readonly shiftsService: ShiftsService) {
     this.initDates();
+    this.loadData();
+  }
+
+  public setDates(fromDate: Date, toDate: Date): void {
+    this.fromDate = fromDate;
+    this.toDate = toDate;
+    this.loadData();
+  }
+
+  private loadData(): void {
     const shifts$ = this.shiftsService.shifts$(this.fromDate, this.toDate, []);
     const calendar$ = this.calendarService.calendar$(this.fromDate, this.toDate);
 
