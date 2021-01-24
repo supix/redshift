@@ -1,8 +1,8 @@
-<tr class="resume text-unimportant">
+<tr class="resume">
     <th scope="row"></th>
     <th scope="row"></th>
     <td *ngFor="let d of daysToShow" class="text-center" [ngClass]="{today: d.today}">
-        <div *ngFor="let s of getShiftsCount(d)">
+        <div *ngFor="let s of getShiftsCount(d.day)">
             <span class="">{{ s.count }}{{ s.code }}</span>
         </div>
     </td>
@@ -12,11 +12,11 @@
     <th scope="row"></th>
     <td *ngFor="let d of daysToShow" [ngClass]="{today: d.today}">
         <div>
-            <span class="float-right">{{ getOffsetCount(d)[0] }}</span>
+            <span class="float-right">{{ getOffsetCount(d.day)[0] }}</span>
             <fa-icon [icon]="faUniversity"></fa-icon>
         </div>
         <div>
-            <span class="float-right">{{ getOffsetCount(d)[1] }}</span>
+            <span class="float-right">{{ getOffsetCount(d.day)[1] }}</span>
             <fa-icon [icon]="faHouseUser"></fa-icon>
         </div>
     </td>
