@@ -1,4 +1,3 @@
-import { inject } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 
 import { CalendarFakeService } from './calendar.service.fake';
