@@ -12,13 +12,19 @@
     <div class="collapse navbar-collapse" [ngClass]="{ 'show': navbarOpen }">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" routerLink="/shifts" routerLinkActive="active-link">
-                    Turni
+                <a class="nav-link" routerLink="/day-report" routerLinkActive="active-link">
+                    Sintesi
                 </a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" routerLink="/calendar">Calendario</a>
+                <a class="nav-link" routerLink="/shifts" routerLinkActive="active-link">
+                    Griglia
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/calendar"  routerLinkActive="active-link">Calendario</a>
             </li>
         </ul>
     </div>
