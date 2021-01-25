@@ -14,7 +14,6 @@ export class ShiftsResume {
             this.map.set(key, this.map.get(key) + count);
         } else {
             this.map.set(key, count);
-            console.log('hhh', key, this.map.get(key), this.map.has(key));
         }
     }
 
