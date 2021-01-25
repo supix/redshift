@@ -10,7 +10,7 @@ export class TextEllipsisPipe implements PipeTransform {
    * @param text the string to shorten
    * @param maxLen max allowed string length (should be greater than 3)
    */
-  transform(text: string, maxLen: number): string {
+  transform(text: string, maxLen: number = 12): string {
     if (text.length <= maxLen) {
       return text;
     }

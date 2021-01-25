@@ -1,0 +1,17 @@
+* {
+    color: gray;
+}
+
+.title {
+    background-color: #f9f9f9;
+}
+
+.shift-code, .shift-count {
+    font-size: 300%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.surname {
+    font-size: 120%;
+    font-weight: bold;
+}
