@@ -6,22 +6,30 @@
                     <button type="button" class="btn btn-secondary text-light">
                         <fa-icon class="text-light" [icon]="faAngleLeft"></fa-icon>
                     </button>
-                  mer 23 apr
+                    mer 23 apr
                     <button type="button" class="btn btn-secondary text-light">
                         <fa-icon class="text-light" [icon]="faAngleRight"></fa-icon>
                     </button>
                 </div>
-              </div>
+            </div>
         </div>
         <div class="col-lg-4 mb-3">
             <div class="card">
-                <div class="card-header shift-code text-primary text-center">
-                    M
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col col-lg-4 align-baseline">
+                        </div>
+                        <div class="col col-lg-4 text-center text-primary">
+                            <div class="shift-code text-primary">M</div>
+                            <div class="shift-desc text-unimportant">MATTINA</div>
+                        </div>
+                        <div class="col col-lg-4 text-right shift-count text-success">
+                            3
+                        </div>
+                    </div>
+
                 </div>
-                <div class="card-body shift-count text-center" [ngClass]="{'text-danger': false, 'text-success': true}">
-                    3
-                </div>
-                <div class="card-footer">
+                <div class="card-body" [ngClass]="{'text-danger': false, 'text-success': true}">
                     <div>
                         <fa-icon class="float-right text-primary" [icon]="faUniversity"></fa-icon>
                         <span class="badge bg-success text-light mr-2">Interni</span>
@@ -42,7 +50,7 @@
                         <fa-icon class="float-right" [icon]="faHouseUser"></fa-icon>
                         <span class="badge bg-info text-light mr-2">Esterni</span>
                         <fa-icon class="mr-2" [icon]="faUser"></fa-icon>
-                        <span class="name mr-2">Gancarlo</span>
+                        <span class="name mr-2">Matteo</span>
                         <span class="surname mr-2">Verdi</span>
                         <fa-icon class="mr-2" [icon]="faEnvelope"></fa-icon>
                     </div>
